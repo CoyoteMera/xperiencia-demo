@@ -1,0 +1,78 @@
+/* Modo demo (?demo): barra común del viajero, la oficina y el Panel Global, y el recorrido de la oficina.
+   Se enlaza DESPUÉS de la hoja de cada app para usar sus tokens --color-*.
+   Sin ?demo, #barraDemo está hidden y nada de esto se ve. */
+
+/* ---------- barra de demo ---------- */
+#barraDemo{box-sizing:border-box;padding:8px max(16px, calc((100% - 1100px) / 2));
+  background:var(--color-neutral-bg);border-bottom:1px solid var(--color-neutral-border);
+  font-family:'Poppins',sans-serif;font-weight:400;font-size:12px;line-height:18px;color:var(--color-text-muted)}
+#barraDemo[hidden]{display:none}
+/* El viajero la lleva fija arriba: barra-demo.js mide su altura real en --alto-barra-demo y el body se corre esa altura. */
+body.con-barra-demo #barraDemo{position:fixed;top:0;left:0;right:0;z-index:9000}
+body.con-barra-demo{padding-top:var(--alto-barra-demo, 93px)}
+body.con-barra-demo .pantalla.acceso.viva{min-height:calc(100dvh - 56px - var(--alto-barra-demo, 93px))}
+
+#barraDemo .fila{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px;min-height:24px}
+#barraDemo .sello{display:inline-flex;align-items:center;min-height:24px;padding:0 12px;border-radius:99px;
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;letter-spacing:2.4px;
+  background:var(--color-brand-500);color:var(--color-text-on-brand)}
+#barraDemo .demos{display:flex;gap:8px}
+#barraDemo .demos a{display:inline-flex;align-items:center;box-sizing:border-box;height:24px;padding:0 12px;border-radius:99px;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:18px;text-decoration:none;white-space:nowrap;
+  color:var(--color-text-default);border:1px solid var(--color-neutral-border)}
+#barraDemo .demos a:hover{border-color:var(--color-brand-300);color:var(--color-brand-300)}
+#barraDemo .demos a[aria-current="page"]{font-weight:600;background:var(--color-brand-500);
+  border-color:var(--color-brand-500);color:var(--color-text-on-brand)}
+#barraDemo .letrero{font-size:12px;line-height:18px}
+#barraDemo .botones{display:flex;gap:8px;padding:4px;margin:0 -4px;overflow-x:auto;
+  scrollbar-width:thin;scrollbar-color:var(--color-neutral-border) transparent}
+#barraDemo button{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:99px;cursor:pointer;white-space:nowrap;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;
+  background:transparent;color:var(--color-text-default);border:1px solid var(--color-neutral-border)}
+#barraDemo button:hover{border-color:var(--color-brand-300);color:var(--color-brand-300)}
+#barraDemo button[aria-current="page"]{font-weight:600;background:var(--color-brand-500);
+  border-color:var(--color-brand-500);color:var(--color-text-on-brand)}
+#barraDemo .recorrido{display:inline-flex;align-items:center;gap:8px;padding:0 12px;border:0;
+  color:var(--color-brand-300);font-weight:600}
+#barraDemo .recorrido:hover{color:var(--color-brand-300);text-decoration:underline}
+
+@media (min-width:1024px){
+  /* sello y selector a la izquierda y, si hay pantallas, una sola fila de botones que se desliza */
+  #barraDemo{display:flex;align-items:center;gap:16px;padding:8px max(24px, calc((100% - 1100px) / 2))}
+  #barraDemo[hidden]{display:none}
+  #barraDemo .fila{flex:none}
+  #barraDemo .botones{flex:1;min-width:0;margin:-4px 0}
+  /* el viajero de escritorio: cabecera y menú bajan lo que mide la barra fija */
+  body.con-barra-demo header, body.con-barra-demo nav{top:var(--alto-barra-demo, 93px)}
+  body.con-barra-demo .pantalla.acceso.viva{min-height:calc(100vh - var(--alto-barra-demo, 93px))}
+}
+
+/* ---------- recorrido de la oficina ---------- */
+/* Recuadro que late sobre lo que explica el paso; no cambia su tamaño ni su posición. */
+.guia-foco{outline:2px solid var(--color-brand-500);outline-offset:4px;animation:guia-late 1.6s ease-in-out infinite}
+@keyframes guia-late{0%,100%{box-shadow:0 0 0 0 rgba(255,151,0,0)}50%{box-shadow:0 0 0 8px rgba(255,151,0,.25)}}
+@media (prefers-reduced-motion: reduce){.guia-foco{animation:none}}
+
+/* Tarjeta fija abajo. A 390 va encima del menú inferior (--alto-tabs la mide recorrido.js); desde 1024 abajo a la derecha. */
+#recorrido{position:fixed;z-index:30;left:12px;right:12px;bottom:calc(var(--alto-tabs, 72px) + 12px);box-sizing:border-box;
+  padding:16px;border-radius:16px;background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);
+  color:var(--color-text-default)}
+#recorrido .paso{margin:0 40px 4px 0;font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;line-height:18px;
+  letter-spacing:2.4px;color:var(--color-brand-300)}
+#recorrido h2{margin:0 0 4px;font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;line-height:24px}
+#recorrido h2:focus{outline:none}
+#recorrido .texto{margin:0 0 12px;font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;line-height:21px;
+  color:var(--color-text-muted)}
+#recorrido .acciones{display:flex;flex-direction:row;justify-content:flex-end;gap:8px;margin:0}
+#recorrido .acciones button{flex:1 1 0}
+#recorrido button{min-height:44px;padding:0 16px;border-radius:99px;cursor:pointer;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px}
+#recorrido .salir{position:absolute;top:8px;right:8px;min-width:44px;padding:0;background:transparent;border:0;
+  color:var(--color-text-muted)}
+#recorrido .anterior{background:transparent;color:var(--color-text-default);border:1px solid var(--color-neutral-border)}
+#recorrido .siguiente{background:var(--color-brand-500);color:var(--color-text-on-brand);border:1px solid var(--color-brand-500);font-weight:600}
+#recorrido button:focus-visible{outline:2px solid var(--color-brand-300);outline-offset:2px}
+@media (min-width:1024px){
+  #recorrido{left:auto;right:24px;bottom:24px;width:360px}
+  #recorrido .acciones button{flex:0 0 auto}
+}

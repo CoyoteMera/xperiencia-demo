@@ -1,0 +1,473 @@
+/* Viajero world level (index.html). Se enlaza después de base.css y lo sobreescribe.
+   Medidas leídas del .fig con el CLI openpencil (marcos 0:1052, 0:1079, 0:1150, 0:1171, a 390).
+   Montserrat 600/900, Poppins 400/500/600. Escala 12 · 14 · 16 · 18 · 20 · 28 · 32. */
+:root {
+  --color-brand-500: #FF9700;
+  --color-brand-600: #FC6404;
+  --color-brand-300: #FEBF4D;
+  --color-neutral-bg: #1E1E1E;
+  --color-neutral-surface-1: #272727;
+  --color-neutral-surface-2: #323232;
+  --color-neutral-surface-3: #3D3D3D;
+  --color-neutral-border: #464646;
+  --color-text-default: #F2F2F0;
+  --color-text-muted: #AEAEAE;
+  --color-text-faint: #8A8A8A;
+  --color-text-on-brand: #000000;
+  --color-success-500: #3FA66B;
+  --color-success-bg: #16301F;
+  --color-warning-500: #E8B931;
+  --color-warning-bg: #3A3112;
+  --color-danger-500: #E5534B;
+  --color-danger-bg: #3B1A18;
+  --color-info-500: #5AA9E6;
+  --color-info-bg: #14283A;
+  --color-whatsapp: #25D366;
+  --color-voucher-paper: #FFFFFF;
+  --color-voucher-ink: #1D1D1D;
+  --color-voucher-ink-muted: #5C5C5C;
+  --color-voucher-rule: #E3E3E0;
+  --color-danger-text: #F2837C;
+  --color-success-text: #4AB277;
+}
+
+/* ---------- base ---------- */
+html, body{background:var(--color-neutral-surface-1);color:var(--color-text-default)}
+.app{background:var(--color-neutral-surface-1)}
+.curvas{display:none}
+main{padding:0 16px}
+/* las pantallas internas dejan sitio a la navegación inferior (nav, position:fixed, ~60 px + zona segura) */
+.pantalla:not(.acceso){padding-bottom:120px}
+
+/* anillo de foco: 2 px brand-300 */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, label.check:focus-within{
+  outline:2px solid var(--color-brand-300);outline-offset:2px}
+
+/* ---------- cabecera ---------- */
+header{height:56px;padding:0 16px;gap:8px;justify-content:flex-start}
+.marca-icono{color:var(--color-brand-500);flex:none}
+.marca{font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;letter-spacing:2px;color:var(--color-text-default)}
+body:has(#pEntrada.viva) .marca-icono{display:none}
+.salir{margin-left:auto;min-height:44px;min-width:44px;border:0;background:none;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;color:var(--color-text-muted);padding:0 8px}
+.salir:hover{color:var(--color-brand-500)}
+.salir .ic-salir{display:none}
+
+/* ---------- titular, cejilla, texto ---------- */
+h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;line-height:31px;letter-spacing:0;color:var(--color-text-default)}
+.cejilla{font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;letter-spacing:2.4px;margin:0;
+  text-transform:uppercase;color:var(--color-brand-500)}
+.tenue{font-size:14px;line-height:21px;color:var(--color-text-muted);margin:0}
+.saludo{display:flex;flex-direction:column;gap:12px;padding:0}
+.logo-grande{width:40px;height:40px;max-width:none;margin:0;color:var(--color-brand-500)}
+
+/* ---------- campos ---------- */
+.campo{display:flex;flex-direction:column;gap:8px}
+label{font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
+  color:var(--color-text-default);margin:0}
+.req{color:var(--color-danger-text);font-weight:500;margin-left:4px}
+.nota-req{font-size:12px;line-height:18px;color:var(--color-text-muted);margin:0}
+input, select{min-height:48px;padding:0 16px;border:1px solid var(--color-neutral-border);border-radius:8px;
+  background-color:var(--color-neutral-surface-1);color:var(--color-text-default);font-size:16px}
+input::placeholder{color:var(--color-text-faint)}
+input:focus, select:focus{border-color:var(--color-brand-300)}
+select{background-position:right 16px center}
+.campo-clave{position:relative}
+.campo-clave input{padding-right:64px}
+.ojo{right:4px;min-height:44px;min-width:44px;padding:0 12px;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--color-brand-500)}
+.reglas-clave{display:flex;flex-direction:column;gap:4px;margin:0;font-size:12px;line-height:18px;color:var(--color-text-muted)}
+.reglas-clave li::before{color:inherit}
+.reglas-clave li.ok, .reglas-clave li.ok::before{color:var(--color-success-text)}
+
+/* casilla */
+.check{display:flex;align-items:center;gap:12px;padding:10px 0;border:0;background:none;border-radius:0;margin:0}
+.check.on{background:none;border:0}
+.check input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;min-height:24px;margin:0;padding:0;
+  border:1.5px solid var(--color-neutral-border);border-radius:6px;background:transparent}
+.check input:checked{background:var(--color-brand-500) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>") center/16px no-repeat;
+  border-color:var(--color-brand-500)}
+.check span{font-size:14px;line-height:21px;color:var(--color-text-default)}
+.check em{font-size:12px;line-height:18px;color:var(--color-text-muted);margin-top:4px}
+
+/* ---------- botones ---------- */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:0 24px;border:1px solid transparent;
+  border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;letter-spacing:0;
+  background:var(--color-brand-500);color:var(--color-text-on-brand);text-decoration:none;text-align:center}
+.btn:hover{background:var(--color-brand-600);color:var(--color-text-on-brand)}
+.btn:disabled{background:var(--color-neutral-surface-3);color:var(--color-text-faint)}
+.btn.secundario{background:transparent;border-color:var(--color-neutral-border);color:var(--color-text-default)}
+.btn.fantasma{background:transparent;border-color:transparent;color:var(--color-text-default)}
+.btn.secundario:hover, .btn.fantasma:hover{background:transparent;color:var(--color-brand-300)}
+.btn.secundario:hover{border-color:var(--color-neutral-border)}
+.btn.whatsapp{background:var(--color-whatsapp);color:var(--color-text-on-brand);font-size:14px;padding:8px 16px}
+.btn.whatsapp:hover{background:var(--color-whatsapp);color:var(--color-text-on-brand);filter:brightness(1.08)}
+.btn+.btn{margin-top:0}
+.enlace{display:inline-block;width:auto;padding:0;background:none;border:0;font-family:'Poppins',sans-serif;
+  font-size:12px;font-weight:500;line-height:18px;color:var(--color-brand-500);text-decoration:underline;cursor:pointer}
+.enlace:hover{color:var(--color-brand-300)}
+
+/* ---------- tarjeta, pastilla, barra de progreso (las reutilizan las pantallas internas) ---------- */
+.tarjeta{background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);border-radius:12px;padding:16px;margin-bottom:12px}
+.pastilla, .paso{display:inline-flex;align-items:center;min-height:24px;padding:0 12px;border-radius:99px;
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;letter-spacing:0;text-transform:none;
+  background:var(--color-neutral-surface-3);color:var(--color-text-default);border:1px solid var(--color-neutral-border)}
+.pastilla b{font-size:12px;color:var(--color-brand-500)}
+.barra{height:6px;margin:0;border-radius:99px;background:var(--color-neutral-surface-3)}
+.barra i{display:none}
+.barra span{background:var(--color-text-muted)}
+.aviso{font-size:14px;line-height:21px;border-radius:8px;color:var(--color-brand-300)}
+.error{font-size:14px;line-height:21px;border-radius:8px;margin:0;background:var(--color-danger-bg);border-color:var(--color-danger-500);color:var(--color-danger-text)}
+
+/* ---------- pantallas de acceso a 390 ---------- */
+.pantalla.acceso.viva{display:flex;flex-direction:column;min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px)}
+.acceso .contenido{display:flex;flex-direction:column;gap:20px;padding-top:16px}
+#pRegistro .contenido{gap:16px}
+#camposPersona, #camposCuenta{display:flex;flex-direction:column;gap:16px}
+.acceso .contenido > div[id$="Error"]:empty{display:none}
+.pie-fijo{position:sticky;bottom:0;margin:auto -16px 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;gap:8px;background:var(--color-neutral-surface-1)}
+.pie-fijo .btn{margin:0}
+#pRegistro .pie-fijo{position:static}   /* con la nota legal ocupa 240 px: no se pega al borde */
+.nota-legal{display:flex;flex-direction:column;gap:8px;padding-top:8px}
+.nota-legal .legal{margin:0;font-size:12px;line-height:18px;color:var(--color-text-muted)}
+.nota-legal .enlace{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+
+/* ---------- alta, pasos 2 a 4 (Tu viaje, Tus datos, Tu historial) ---------- */
+#pInscribir.viva, #pDatos.viva, #pValidar.viva{display:flex;flex-direction:column;gap:16px;padding-top:8px}
+.pantalla .saludo{gap:8px}
+/* indicador de paso: 4 tramos de 4 px (el texto de cada paso queda solo para lectores de pantalla) */
+.pasos{display:flex;gap:8px;margin:0;flex-wrap:wrap}
+/* rótulo visible «PASO N DE 4» sacado del paso activo (los spans conservan «N Nombre» para lectores de pantalla) */
+.pasos::before{flex:0 0 100%;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;line-height:18px;
+  letter-spacing:1.68px;color:var(--color-brand-500)}
+.pasos:has(.paso:nth-child(1).act)::before{content:'PASO 1 DE 4'}
+.pasos:has(.paso:nth-child(2).act)::before{content:'PASO 2 DE 4'}
+.pasos:has(.paso:nth-child(3).act)::before{content:'PASO 3 DE 4'}
+.pasos:has(.paso:nth-child(4).act)::before{content:'PASO 4 DE 4'}
+/* con el indicador a la vista, la cejilla «Paso N de 4» que escribe el JS sobra */
+.saludo:has(.pasos[style*="flex"]) > .cejilla{display:none}
+.pasos .paso{flex:1 1 0;min-height:0;height:4px;padding:0;border:0;border-radius:99px;font-size:0;line-height:0;
+  background:var(--color-neutral-surface-3);overflow:hidden}
+.pasos .paso.ok, .pasos .paso.act{background:var(--color-brand-500)}
+/* tarjetas por bloque de campos */
+#pInscribir .tarjeta, #pDatos .tarjeta, #pValidar .tarjeta{display:flex;flex-direction:column;gap:8px;margin:0;border-radius:16px}
+#pInscribir .tarjeta > label, #pDatos .tarjeta > label, .acomp > label{margin-top:8px}
+#pInscribir .tarjeta > .cejilla:first-child, #pDatos .tarjeta > .cejilla:first-child, #pValidar .tarjeta > .cejilla:first-child{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:16px;letter-spacing:0;text-transform:none;color:var(--color-text-default)}
+#pInscribir .tarjeta.salida > .cejilla:first-child{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;
+  letter-spacing:1.68px;text-transform:uppercase;color:var(--color-brand-500)}
+.pista{margin:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+#docRegistrado:empty, #infoSalida:empty{display:none}
+.politica{font-size:14px;color:var(--color-text-muted)}
+.opc{font-size:12px;font-weight:400;color:var(--color-text-muted)}
+.aviso-cupo{margin:0;padding:16px;border:0;border-radius:12px;background:var(--color-info-bg);
+  font-size:14px;line-height:21px;color:var(--color-text-default)}
+.aviso-cupo b{display:block;margin-bottom:4px;font-weight:500;color:var(--color-info-500)}
+#resumenPersonas{font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;color:var(--color-text-default)}
+/* acompañantes */
+#listaAcompanantes:empty{display:none}
+.acomp{display:flex;flex-direction:column;gap:8px;margin:0;padding:16px;border-radius:12px;
+  background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.acomp .cejilla{font-size:12px}
+.acomp .enlace{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;width:auto;padding:0}
+#listaAcompanantes{display:flex;flex-direction:column;gap:12px}
+/* casillas del historial: filas de 44 px */
+#cajaValidar{display:flex;flex-direction:column;gap:16px}
+#cajaValidar .check{min-height:44px;padding:0}
+.check span{display:flex;flex-direction:column}
+/* botones del pie: en el flujo (la navegación inferior es fija y taparía un pie pegajoso) */
+.pie-pasos{display:flex;flex-direction:column;gap:8px}
+#iError:empty, #dError:empty{display:none}
+
+/* ---------- pantallas con sesión a 390 (Mi nivel, Destinos, Salidas, Mi viaje, Comprobante, Enviado) ---------- */
+/* una columna con 20 px entre bloques; las tarjetas pierden el margen de abajo */
+#pEscalera.viva, #pTours.viva, #pSalidas.viva, #pMiViaje.viva, #pComprobante.viva, #pEnviado.viva{
+  display:flex;flex-direction:column;gap:20px;padding-top:20px}
+#pTours.viva, #pSalidas.viva, #pMiViaje.viva, #pComprobante.viva{gap:16px}
+.pantalla:not(.acceso) .tarjeta, .grupo, .tour{margin:0}
+.pantalla:not(.acceso) .cejilla{font-size:12px;letter-spacing:1.2px;color:var(--color-text-muted)}
+.pantalla:not(.acceso) .tarjeta > .cejilla{margin-bottom:6px}
+.pantalla .saludo .tenue{margin-top:4px}
+#listaTours, #listaSalidas, #listaMiViaje{display:flex;flex-direction:column;gap:12px}
+#listaSalidas{gap:14px}
+.vacio{padding:24px 0;color:var(--color-text-muted)}
+.vacio p{font-size:14px;line-height:21px;margin:0}
+.pantalla > .btn + .btn{margin-top:-8px}
+
+/* aviso con punto (advertencia) */
+.pantalla:not(.acceso) .aviso{display:flex;gap:12px;margin:0;padding:16px;border:0;border-radius:12px;
+  background:var(--color-warning-bg);color:var(--color-text-default)}
+.pantalla:not(.acceso) .aviso::before{content:'';flex:none;width:8px;height:8px;margin-top:7px;border-radius:50%;
+  background:var(--color-warning-500)}
+
+/* ---- barra de abajo: 72 + 1 de borde, 4 ítems de igual ancho, icono 24 y rótulo 12/16 ---- */
+nav{height:calc(73px + env(safe-area-inset-bottom));padding:8px 16px env(safe-area-inset-bottom);
+  background:var(--color-neutral-surface-2);backdrop-filter:none;border-top:1px solid var(--color-neutral-border);
+  justify-content:space-between;align-items:center;gap:4px}
+nav button{flex:1 1 0;min-width:0;max-width:80px;height:56px;margin:0;padding:0;border:0;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  background:transparent;color:var(--color-text-muted);
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none}
+nav button svg{flex:none;display:block}
+nav button.on{background:var(--color-neutral-surface-3);color:var(--color-brand-500)}
+
+/* ---- Mi nivel ---- */
+.perfil-chip, .perfil-chip.explorador, .perfil-chip.todoterreno, .perfil-chip.curioso{
+  align-self:flex-start;display:inline-flex;align-items:center;margin:0;padding:6px 16px;border-radius:99px;
+  border:1px solid var(--color-neutral-border);background:var(--color-neutral-surface-2);color:var(--color-text-default);
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;letter-spacing:0;text-transform:none}
+#pEscalera .saludo{gap:10px}
+.contador{gap:32px;margin:0;padding:0;border:0}
+.dato{display:flex;flex-direction:column;gap:2px}
+.dato .cifra{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;line-height:32px;color:var(--color-text-default)}
+.dato .rotulo{margin:0;font-family:'Poppins',sans-serif;font-size:12px;line-height:18px;letter-spacing:0;text-transform:none;color:var(--color-text-muted)}
+.perfil-caja{display:flex;flex-direction:column;gap:8px}
+.explica{margin:0;font-size:14px;line-height:21px;color:var(--color-text-default)}
+.perfil-caja .enlace{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;font-size:14px;font-weight:600;line-height:21px;text-decoration:none}
+.perfil-fila{padding:12px 0;border-top:1px solid var(--color-neutral-border)}
+.perfil-fila b{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--color-text-default);margin:0}
+.perfil-fila span{font-size:14px;line-height:21px;color:var(--color-text-muted)}
+/* escalera: peldaños en columna, cota de 28 */
+.tarjeta:has(.escalera){display:flex;flex-direction:column;gap:14px}
+.tarjeta:has(#listaPremios){display:flex;flex-direction:column;gap:14px}
+.escalera{display:flex;flex-direction:column;gap:10px;padding:0;margin:0}
+.escalera::before, .escalera::after{display:none}
+.peldano{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:0}
+.fase0{padding:0}
+.cota{position:static;transform:none;flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  background:transparent;border:1px solid var(--color-neutral-border);box-shadow:none;
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;line-height:1;color:var(--color-text-muted)}
+.fase0 .cota{border-style:solid;font-size:14px}
+.peldano.hecho .cota{background:var(--color-brand-300);border-color:var(--color-brand-300);color:var(--color-text-on-brand)}
+.peldano.sigue .cota{border-color:var(--color-brand-500);color:var(--color-text-default);box-shadow:none}
+.nombre-peldano, .peldano.hecho .nombre-peldano, .peldano.sigue .nombre-peldano{
+  flex:1 1 0;min-width:0;font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;line-height:21px;color:var(--color-text-default)}
+.peldano.sigue .nombre-peldano{flex:1 1 calc(100% - 40px)}
+.veces{padding:2px 8px;border-radius:99px;background:var(--color-brand-300);color:var(--color-text-on-brand);
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px}
+.etiq-sigue{margin-left:40px;padding:4px 10px;border:1px solid var(--color-brand-500);border-radius:99px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none;color:var(--color-brand-500)}
+.reco{margin:0;padding:0;border:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.pastillas{margin:0;gap:8px}
+/* reconocimientos y territorio */
+#listaPremios{display:flex;flex-direction:column;gap:12px}
+#cajaTerritorio > * + *{margin-top:12px}
+.premio{display:flex;align-items:flex-start;gap:12px;padding:0;border:0}
+.medalla{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  background:var(--color-neutral-surface-3);border:0;color:var(--color-text-muted);
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;line-height:1}
+.premio.ganado .medalla{background:var(--color-success-text);border:0;color:var(--color-text-on-brand)}
+.premio.siguiente .medalla{border:1px solid var(--color-brand-500);color:var(--color-text-muted)}
+#cajaTerritorio .premio:not(.ganado) .medalla:not(.cifra){background:transparent;border:1px solid var(--color-neutral-border)}
+#cajaTerritorio .medalla.cifra{width:52px;background:var(--color-neutral-surface-3);border:0;color:var(--color-text-default);
+  font-size:12px;letter-spacing:0}
+.premio-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.premio-txt b, .premio.ganado .premio-txt b, .premio.siguiente .premio-txt b{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px;color:var(--color-text-default)}
+.premio-txt span{margin:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.premio.ganado .premio-txt span{color:var(--color-success-text)}
+.premio-txt span b{display:inline;font-weight:600;color:var(--color-text-default)}
+#cajaTerritorio .faltan{font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+#cajaTerritorio .pista{margin:12px 0 0 !important;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+#cajaTerritorio .pista:last-child{font-size:12px;line-height:18px}
+#btnMisDatos.pendiente{border-color:var(--color-brand-500);color:var(--color-brand-500)}
+.enlaces{display:flex;flex-direction:column;gap:10px;margin:0}
+.enlace-caja{display:flex;align-items:center;gap:12px;min-height:44px;padding:16px;border:0;border-radius:12px;
+  background:var(--color-neutral-surface-2);color:var(--color-text-default);text-decoration:none}
+.enlace-caja:hover{background:var(--color-neutral-surface-3)}
+.enlace-caja svg{flex:none;color:var(--color-brand-500)}
+.enlace-caja.wa svg{color:var(--color-success-text)}
+.enlace-caja .txt{display:flex;flex-direction:column;gap:2px}
+.enlace-caja b{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px}
+.enlace-caja span{margin:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+
+/* ---- sellos ---- */
+.sello{display:inline-flex;align-self:flex-start;align-items:center;margin:0;padding:4px 10px;border-radius:99px;
+  border:1px solid var(--color-brand-500);font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;line-height:16px;
+  letter-spacing:0;text-transform:none;color:var(--color-brand-500)}
+.hecho-sello{border-color:var(--color-success-text);color:var(--color-success-text)}
+
+/* ---- Destinos ---- */
+.tour{display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--color-neutral-border);border-radius:16px;
+  background:var(--color-neutral-surface-2)}
+.tour.reco{border-color:var(--color-brand-500)}
+.tour h3{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:20px;line-height:24px;color:var(--color-text-default)}
+.tour-meta{margin:0;font-size:14px;line-height:21px;font-weight:400;color:var(--color-text-muted)}
+.tour-btns{display:flex;align-items:center;gap:10px}
+.mini{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;
+  border:1px solid var(--color-neutral-border);border-radius:12px;background:transparent;color:var(--color-text-default);
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;text-decoration:none;cursor:pointer}
+.mini.gris{min-height:44px;border:0;padding:0 8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--color-text-muted)}
+.mini:hover{color:var(--color-brand-300)}
+
+/* ---- Salidas y tarjeta de Mi viaje ---- */
+.grupo{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--color-neutral-border);border-radius:16px;
+  background:var(--color-neutral-surface-2)}
+.grupo.mio{border-color:var(--color-brand-500)}
+.grupo h3{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:22px;color:var(--color-text-default)}
+.grupo .cuando{margin:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.cuando em{font-style:normal;font-weight:400;color:var(--color-text-muted)}
+.conteo{margin:0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.conteo b{font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;color:var(--color-text-muted)}
+.faltan{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px;color:var(--color-text-default)}
+.faltan.completo{color:var(--color-success-text)}
+.grupo .pista{margin:0 !important}
+.ya-reservo{margin:0;padding:0;border:0;text-align:left;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px;color:var(--color-success-text)}
+.grupo .btn, a.btn.reservar{margin:0;line-height:1.3}
+
+/* Mi viaje: estado con punto, saldo como cifra grande, por validar como aviso */
+.grupo.miviaje{gap:12px}
+.grupo.miviaje h3{font-size:20px;line-height:24px}
+.grupo.miviaje .faltan{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;
+  background:var(--color-neutral-surface-3);color:var(--color-text-muted);font-weight:500}
+.grupo.miviaje .faltan::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:currentColor}
+.grupo.miviaje .faltan.e-pendiente{background:var(--color-warning-bg);color:var(--color-warning-500)}
+.grupo.miviaje .faltan.e-confirmada{background:var(--color-info-bg);color:var(--color-info-500)}
+.grupo.miviaje .faltan.e-lista{background:var(--color-success-bg);color:var(--color-success-text)}
+.grupo.miviaje .faltan.e-cancelada{background:var(--color-danger-bg);color:var(--color-danger-text)}
+.cifras-m{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0}
+.cifra-m{display:flex;flex-direction:column;gap:4px;min-width:0;padding:16px;border:0;border-radius:16px;text-align:left;
+  background:var(--color-neutral-surface-1)}
+.cifra-m span{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;line-height:16px;letter-spacing:1.68px;
+  text-transform:uppercase;color:var(--color-text-muted)}
+.cifra-m b{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;color:var(--color-text-default)}
+.cifra-m.saldo{grid-column:1 / -1;order:-1}
+.cifra-m.saldo b{font-weight:900;font-size:28px;line-height:32px;color:var(--color-text-default)}
+.pista.por-validar{position:relative;margin:0;padding:12px 12px 12px 32px;border-radius:12px;background:var(--color-warning-bg);
+  font-size:14px;line-height:21px;color:var(--color-text-default)}
+.pista.por-validar::before{content:'';position:absolute;left:12px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--color-warning-500)}
+.por-validar b{font-weight:500;color:var(--color-warning-500)}
+.acomps-m{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;border:0}
+.acomp-m{display:flex;flex-direction:column;gap:2px;margin:0;padding:12px 16px;border-radius:12px;background:var(--color-neutral-surface-1)}
+.acomp-m b{font-family:'Poppins',sans-serif;font-weight:500;font-size:16px;color:var(--color-text-default)}
+.acomp-m span{font-size:14px;line-height:21px;color:var(--color-text-muted)}
+
+/* ---- Subir comprobante ---- */
+#pComprobante .tarjeta{display:flex;flex-direction:column;gap:8px;margin:0;border-radius:16px}
+#pComprobante .tarjeta > label:not(:first-child){margin-top:8px}
+#pComprobante .tarjeta > div[style]{display:none}
+#pComprobante .tarjeta > .btn{margin-top:8px}
+#pComprobante .tarjeta > .btn + .btn{margin-top:0}
+#cError:empty{display:none}
+.con-moneda{display:flex;align-items:center;gap:12px}
+.con-moneda span{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;color:var(--color-text-default)}
+.con-moneda input{flex:1;min-width:0}
+.datos-pago{margin:0;padding:12px 16px;border:1px solid var(--color-neutral-border);border-radius:12px;
+  background:var(--color-neutral-surface-1);font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.datos-pago b{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--color-text-default)}
+input[type=file]{padding:12px 16px;font-size:14px;color:var(--color-text-muted)}
+
+/* ---- Comprobante enviado ---- */
+#pEnviado.viva{align-items:stretch;padding-top:44px;gap:16px}
+#pEnviado h1{margin:0;text-align:center;font-size:32px;line-height:36px}
+#pEnviado .tenue{text-align:center;font-size:16px;line-height:24px}
+.sello-ok{align-self:center;display:grid;place-items:center;width:96px;height:96px;border-radius:50%;
+  background:var(--color-success-bg);color:var(--color-success-500)}
+.resumen{display:flex;flex-direction:column;gap:12px;padding:16px;border:0;border-radius:16px}
+.fila-res{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fila-res span{font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.fila-res b{font-family:'Poppins',sans-serif;font-weight:400;font-size:16px;color:var(--color-text-default);text-align:right}
+.fila-res b.monto{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px}
+.fila-res b.estado-pastilla{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;
+  background:var(--color-warning-bg);font-weight:500;font-size:14px;color:var(--color-warning-500)}
+.estado-pastilla::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--color-warning-500)}
+.aviso-info{position:relative;padding:12px 12px 12px 32px;border-radius:12px;background:var(--color-info-bg);
+  font-size:14px;line-height:21px;color:var(--color-text-default)}
+.aviso-info::before{content:'';position:absolute;left:12px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--color-info-500)}
+.aviso-info b{display:block;margin-bottom:4px;font-weight:500;color:var(--color-info-500)}
+
+/* =====================================================================================
+   Escritorio desde 1024 px (único punto de corte). Medidas de los marcos de 1440 (0:2614,
+   0:2641, 0:1965, 0:2086, 0:2271, 0:2525) y de diseno/tamanos.md (c), lotes VA y VB.
+   Entre 391 y 1023 px sigue la columna de celular centrada (máx. 560).
+   ===================================================================================== */
+@media (min-width:1024px){
+  .app{max-width:none}
+  /* contenido a 1100 (con 24 de margen mínimo a cada lado) */
+  main{padding:0 max(24px, calc((100% - 1100px) / 2))}
+  .pantalla:not(.acceso){padding-bottom:40px}
+
+  /* ---- franja de arriba: 72 de alto; marca a la izquierda, navegación y salir a la derecha ---- */
+  header{position:sticky;top:0;z-index:10;height:72px;padding:0 max(24px, calc((100% - 1100px) / 2));
+    background:var(--color-neutral-surface-2)}
+  .marca-icono{display:none}
+  .salir{position:relative;display:block;width:44px;height:44px;padding:10px;font-size:0;line-height:0}
+  .salir .ic-salir{display:block;margin:auto}
+  .salir .txt-salir{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  nav{top:0;bottom:auto;left:50%;right:auto;width:min(1100px, calc(100% - 48px));max-width:none;height:72px;
+    padding:0 52px 0 0;border:0;background:transparent;justify-content:flex-end;gap:8px;transform:translateX(-50%);
+    pointer-events:none}
+  nav button{pointer-events:auto;flex:none;max-width:none;height:72px;padding:0 12px;border-radius:0;
+    flex-direction:row;gap:8px;font-size:14px;line-height:21px;background:transparent}
+  nav button svg{width:20px;height:20px}
+  nav button.on{background:transparent;text-decoration:underline;text-decoration-thickness:3px;
+    text-underline-offset:23px;text-decoration-color:var(--color-brand-500);text-decoration-skip-ink:none}
+  nav button.on svg{text-decoration:none}
+
+  /* ---- pantallas de acceso: dos mitades de 720 (Entrada, Crear cuenta, Olvidé, Contraseña nueva) ---- */
+  body:has(.pantalla.acceso.viva) .app{background:linear-gradient(90deg, var(--color-neutral-surface-2) 50%, var(--color-neutral-surface-1) 50%)}
+  body:has(.pantalla.acceso.viva) main{padding:0}
+  body:has(.pantalla.acceso.viva) header{position:absolute;top:0;left:0;right:auto;width:50%;height:auto;
+    padding:40px 80px 0;background:none}
+  .pantalla.acceso.viva{display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:20px;min-height:100vh;padding:96px 0 40px 50%}
+  .acceso .contenido{display:contents}
+  .acceso .contenido > *:not(.saludo), .acceso > .pie-fijo{width:400px;max-width:calc(100% - 48px)}
+  .acceso .contenido > #camposPersona, .acceso .contenido > #camposCuenta{gap:20px}
+  .acceso{animation:none}   /* el transform de base.css haría de este bloque el contenedor del .saludo fijo */
+  .acceso .saludo{position:fixed;left:80px;bottom:96px;width:min(560px, calc(50% - 120px));gap:16px}
+  .acceso .saludo h1{font-size:52px;line-height:58px}
+  .acceso .saludo .cejilla{font-size:14px;letter-spacing:2.8px;line-height:21px}
+  .acceso .saludo .tenue{font-size:18px;line-height:27px;max-width:none}
+  .acceso .logo-grande{width:64px;height:64px}
+  .acceso > .pie-fijo{position:static;margin:0;padding:8px 0 0;background:none}
+
+  /* ---- alta (Tu viaje, Tus datos, Tu historial): tarjetas a 1100 con el título a la izquierda ---- */
+  #pInscribir.viva, #pDatos.viva, #pValidar.viva{padding-top:32px}
+  #pInscribir .tarjeta, #pValidar .tarjeta{display:grid;grid-template-columns:300px 1fr;column-gap:24px;row-gap:0;padding:24px}
+  #pInscribir .tarjeta > *{grid-column:2;margin-top:8px;max-width:560px}
+  #pInscribir .tarjeta > .cejilla:first-child{grid-column:1;grid-row:1 / span 30;margin:0;align-self:start}
+  #pDatos .tarjeta{display:grid;grid-template-columns:300px 1fr 1fr;grid-auto-flow:row dense;column-gap:24px;row-gap:8px;
+    align-items:start;padding:24px}
+  #pDatos .tarjeta > .cejilla:first-child, #pDatos .tarjeta > .nota-req, #pDatos .tarjeta > .pista{grid-column:1}
+  #pDatos .tarjeta > label:nth-of-type(odd), #pDatos .tarjeta > label:nth-of-type(odd) + :is(input,select){grid-column:2}
+  #pDatos .tarjeta > label:nth-of-type(even), #pDatos .tarjeta > label:nth-of-type(even) + :is(input,select){grid-column:3}
+  #pDatos .tarjeta > label{margin-top:0}
+  #pDatos .tarjeta > :is(input,select){margin-bottom:12px}
+  #pDatos .tarjeta > .pista:not(#docRegistrado){margin-bottom:0}
+  .pasos .paso{height:4px}
+  .pie-pasos{flex-direction:row;gap:12px}
+  .pie-pasos .btn{width:auto;min-width:160px}
+  #btnGuardarDatos, #btnInscribir, #btnGuardarHist{min-width:240px}
+  #cajaValidar{max-width:560px}
+
+  /* ---- Mi nivel, Mi viaje, Salidas: columns:2 de 538 con 24 de aire; Destinos: columns:3 de 350 ---- */
+  #pEscalera.viva{display:block;columns:2;column-gap:24px;padding-top:32px}
+  #pEscalera.viva > *{break-inside:avoid;margin:0 0 16px}
+  #pEscalera.viva > .saludo{column-span:all;margin-bottom:20px}
+  #pEscalera.viva > .btn{width:100%}
+  #pEscalera.viva > .btn + .btn{margin-top:0}
+  #pEscalera .explica{max-width:460px}
+  .pantalla .saludo .tenue{max-width:460px}
+  #pSalidas.viva, #pTours.viva{display:block;padding-top:32px}
+  #pSalidas .saludo, #pTours .saludo, #pMiViaje .saludo{margin-bottom:20px}
+  #listaSalidas{display:block;columns:2;column-gap:24px}
+  #listaSalidas .grupo{break-inside:avoid;margin:0 0 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #listaSalidas .grupo > *{grid-column:1 / -1}
+  #listaSalidas .grupo > .btn.reservar{grid-column:auto}
+  #listaSalidas .grupo > button.btn.reservar:last-child{grid-column:1 / -1}
+  #listaTours{display:block;columns:3;column-gap:25px}
+  #listaTours .tour{break-inside:avoid;margin:0 0 12px}
+  #pMiViaje.viva{display:block;padding-top:32px}
+  #pMiViaje.viva > .btn{margin-top:16px;max-width:538px}
+  #listaMiViaje{display:block}
+  .grupo.miviaje{display:block;columns:2;column-gap:24px;padding:24px;margin-bottom:16px}
+  .grupo.miviaje > *{break-inside:avoid;margin:0 0 12px;width:100%}
+  .grupo.miviaje > .btn{display:flex}
+
+  /* ---- Subir comprobante y Comprobante enviado: columna centrada de 538 ---- */
+  #pComprobante.viva, #pEnviado.viva{max-width:538px;margin:0 auto;padding-top:32px}
+  #pEnviado.viva{padding-top:56px}
+  #pEnviado .pie-pasos{flex-direction:column}
+  #pEnviado .pie-pasos .btn{width:100%}
+}

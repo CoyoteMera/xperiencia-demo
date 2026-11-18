@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Oficina · Xperiencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/oficina.css">
+<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+<div id="barraDemo" hidden></div>
+<script>
+/* Clásico y en línea, como en index.html: corre al instante y sin depender de los módulos.
+   Si el módulo de la oficina falla, el error se ve en pantalla en vez de una página vacía. */
+document.body.className = 'js-ok';
+(function(){
+  function pintar(msg){
+    var d = document.getElementById('errorGlobal');
+    if(!d){
+      d = document.createElement('div');
+      d.id = 'errorGlobal';
+      d.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:9999;' +
+        'background:#7A1F1F;color:#fff;font:12px/1.5 -apple-system,sans-serif;' +
+        'padding:14px 16px 28px;max-height:40vh;overflow:auto;white-space:pre-wrap;cursor:pointer;';
+      d.title = 'Tocar para cerrar';
+      d.onclick = function(){ d.remove(); };
+      document.body.appendChild(d);
+    }
+    d.textContent += msg + '\n';
+  }
+  window.addEventListener('error', function(e){ pintar('ERROR: ' + e.message + '\nen línea ' + e.lineno); });
+  window.addEventListener('unhandledrejection', function(e){ pintar('ERROR (promesa): ' + e.reason); });
+  window.__pintarError = pintar;
+})();
+</script>
+<script nomodule>document.body.className = '';</script>
+<div id="sinJS">
+  <b>⚠ El JavaScript está bloqueado</b>
+  Este visor no ejecuta la oficina. Ábrela en Safari o en Chrome.
+</div>
+<div class="curvas"></div>
+
+<!-- Hasta que exigirRol confirme el rol, no se muestra nada de la oficina. -->
+<div class="app oficina" id="appOficina" hidden>
+
+<header>
+  <div class="marca-caja">
+    <span class="marca">XPERIENCIA</span>
+    <small>Oficina</small>
+  </div>
+  <div class="cab-acciones">
+    <!-- Solo el dueño lo ve: main.js lo muestra cuando exigirRol devuelve ese rol. -->
+    <a class="salir" id="enlacePanel" href="panel.html" hidden><svg class="ic" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span class="rotulo">Ir al Panel Global</span></a>
+    <button class="salir" id="btnSalirOficina" onclick="salirOficina()"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg><span class="rotulo">Salir</span></button>
+  </div>
+  <nav class="tabs" id="tabsOficina" role="tablist" aria-label="Secciones de la oficina">
+  <button type="button" role="tab" data-tab="alertas" class="on" aria-selected="true" onclick="irOficina('alertas')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg><span>Alertas</span></button>
+  <button type="button" role="tab" data-tab="bandeja" aria-selected="false" onclick="irOficina('bandeja')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg><span>Bandeja</span></button>
+  <button type="button" role="tab" data-tab="salidas" aria-selected="false" onclick="irOficina('salidas')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span>Salidas</span></button>
+  <button type="button" role="tab" data-tab="ficha" aria-selected="false" onclick="irOficina('ficha')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Viajeros</span></button>
+  <button type="button" role="tab" data-tab="cancelacion" aria-selected="false" onclick="irOficina('cancelacion')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg><span>Devoluciones</span></button>
+  </nav>
+</header>
+
+<main>
+  <div id="avisoSinRed" class="aviso" style="display:none"></div>
+
+  <!-- ============ ALERTAS (visible al entrar) ============ -->
+  <section class="pantalla viva" id="v-alertas">
+    <div class="cejilla">Lo que urge</div>
+    <h1>Alertas</h1>
+    <p class="tenue sub">Salidas que están cerca y todavía tienen saldo o requisitos que bloquean.</p>
+    <div id="cajaAlertas"><div class="aviso">Un momento…</div></div>
+  </section>
+
+  <!-- ============ BANDEJA ============ -->
+  <section class="pantalla" id="v-bandeja">
+    <div class="cejilla">Pagos</div>
+    <h1>Bandeja</h1>
+    <p class="tenue sub">Comprobantes que los viajeros subieron y esperan validación. No cuentan en el saldo hasta que los valides.</p>
+    <div id="cajaBandeja"></div>
+  </section>
+
+  <!-- ============ SALIDAS ============ -->
+  <section class="pantalla" id="v-salidas">
+    <div class="cejilla">Calendario</div>
+    <h1>Salidas</h1>
+    <p class="tenue sub">Próximas primero. Toca una salida para ver a su gente.</p>
+    <div id="cajaSalidas"></div>
+  </section>
+
+  <section class="pantalla" id="v-salida">
+    <button type="button" class="volver" onclick="irOficina('salidas')">← Todas las salidas</button>
+    <div id="cajaSalida"></div>
+  </section>
+
+  <section class="pantalla" id="v-salida-form">
+    <button type="button" class="volver" onclick="irOficina('salidas')">← Todas las salidas</button>
+    <div class="cejilla">Salida</div>
+    <h1 id="tituloSalidaForm">Nueva salida</h1>
+    <div class="tarjeta" id="cajaSalidaForm"></div>
+  </section>
+
+  <section class="pantalla" id="v-enlace">
+    <button type="button" class="volver" onclick="irOficina('salidas')">← Todas las salidas</button>
+    <div class="cejilla">Enlace para un cliente</div>
+    <h1>Enlace de inscripción</h1>
+    <p class="tenue sub">Escoge la salida que ya hablaste con la persona. Le mandas el enlace por WhatsApp y, apenas se registre, le aparece todo puesto.</p>
+    <div class="tarjeta" id="cajaEnlace"></div>
+  </section>
+
+  <!-- ============ PUNTOS DE MONTAJE 9c ============
+       Cada vista nueva es una <section class="pantalla" id="v-<nombre>"> y se registra en main.js
+       con registrarVista('<nombre>', {tab, alEntrar}). Nada de lo de arriba cambia. -->
+  <section class="pantalla" id="v-ficha">
+    <div class="cejilla">Personas</div>
+    <h1>Viajeros</h1>
+    <label for="busca">Buscar por nombre, documento o celular</label>
+    <input type="search" id="busca" oninput="buscarViajeros()" autocomplete="off" placeholder="Escribe al menos 2 letras">
+    <div id="cajaResultados" aria-live="polite"></div>
+    <div id="cajaFicha"></div>
+  </section>
+  <section class="pantalla" id="v-abono"><div id="cajaAbono"></div></section>
+  <section class="pantalla" id="v-cancelacion"><div id="cajaCancelacion"></div></section>
+</main>
+
+</div>
+
+<script src="vendor/supabase.js"></script>
+<script type="module" src="js/oficina/main.js"
+  onerror="__pintarError('ERROR: no se pudo cargar la oficina (falta o falló un archivo de js/oficina/).')"></script>
+</body>
+</html>

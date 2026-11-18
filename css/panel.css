@@ -1,0 +1,251 @@
+/* Panel Global world level. Hoja propia sobre base.css (ya no carga oficina.css).
+   Medidas leídas del .fig con el CLI openpencil (marcos «Panel Global · Salidas / Salida con viajeros / Mes»).
+   Montserrat 600/900, Poppins 400/500/600. Escala 12 · 14 · 16 · 18 · 20 · 28 · 32.
+   Base: 390 (celular). Desde 1024 franja de arriba (como el viajero) y desde 1280 fila de salida en una línea. */
+:root {
+  --color-brand-500: #FF9700;
+  --color-brand-600: #FC6404;
+  --color-brand-300: #FEBF4D;
+  --color-neutral-bg: #1E1E1E;
+  --color-neutral-surface-1: #272727;
+  --color-neutral-surface-2: #323232;
+  --color-neutral-surface-3: #3D3D3D;
+  --color-neutral-border: #464646;
+  --color-text-default: #F2F2F0;
+  --color-text-muted: #AEAEAE;
+  --color-text-faint: #8A8A8A;
+  --color-text-on-brand: #000000;
+  --color-success-500: #3FA66B;
+  --color-success-bg: #16301F;
+  --color-warning-500: #E8B931;
+  --color-warning-bg: #3A3112;
+  --color-danger-500: #E5534B;
+  --color-danger-bg: #3B1A18;
+  --color-info-500: #5AA9E6;
+  --color-info-bg: #14283A;
+  --color-whatsapp: #25D366;
+  --color-voucher-paper: #FFFFFF;
+  --color-voucher-ink: #1D1D1D;
+  --color-voucher-ink-muted: #5C5C5C;
+  --color-voucher-rule: #E3E3E0;
+  --color-danger-text: #F2837C;
+  --color-success-text: #4AB277;
+}
+
+[hidden]{display:none !important}
+
+/* ---------- base ---------- */
+html, body{background:var(--color-neutral-surface-1);color:var(--color-text-default)}
+.app{max-width:none;background:var(--color-neutral-surface-1)}
+.curvas{display:none}
+a:focus-visible, button:focus-visible, select:focus-visible{outline:2px solid var(--color-brand-300);outline-offset:2px}
+
+/* ---------- cabecera (390: 56 de alto) ---------- */
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0 16px;z-index:20;
+  background:var(--color-neutral-surface-2)}
+.marca-caja{display:flex;flex-direction:row;align-items:center;gap:8px}
+.marca{font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;letter-spacing:1.4px;color:var(--color-text-default)}
+.marca-caja small{font-family:'Poppins',sans-serif;font-weight:400;font-size:12px;line-height:18px;letter-spacing:0;
+  text-transform:none;padding:0;color:var(--color-text-muted)}
+.cab-acciones{display:flex;align-items:center}
+.salir{display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:0;background:none;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;color:var(--color-text-muted);
+  text-decoration:none;cursor:pointer}
+.salir:hover{color:var(--color-brand-500)}
+.salir .ic{display:none;flex:none}
+
+/* ---------- navegación: barra de abajo de 72 + 1 ---------- */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;max-width:none;margin:0;padding:0 0 env(safe-area-inset-bottom);
+  background:var(--color-neutral-surface-2);border-top:1px solid var(--color-neutral-border);backdrop-filter:none}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:72px;margin:0;padding:0;
+  border:0;background:none;color:var(--color-text-muted);cursor:pointer;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none}
+.tabs button.on{color:var(--color-brand-500)}
+.tabs button:focus-visible{outline-offset:-4px}
+.tabs svg{flex:none}
+
+/* ---------- contenido ---------- */
+main{padding:20px 16px calc(97px + env(safe-area-inset-bottom))}
+h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;line-height:31px;letter-spacing:0;margin:0 0 16px;
+  color:var(--color-text-default)}
+.cejilla{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;line-height:16px;letter-spacing:1.68px;
+  text-transform:uppercase;margin:0 0 4px;color:var(--color-brand-500)}
+h2{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;letter-spacing:0;margin:0 0 16px;
+  color:var(--color-text-default)}
+.tenue{font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.sub{margin:0 0 16px;max-width:none}
+.aviso{margin:0 0 16px;padding:12px 16px;font-size:14px;line-height:21px;border-radius:8px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);color:var(--color-brand-300)}
+.error{margin:0 0 16px;padding:12px 16px;font-size:14px;line-height:21px;border-radius:8px;
+  background:var(--color-danger-bg);border:1px solid var(--color-danger-500);color:var(--color-danger-text)}
+.vacio{padding:32px 16px;text-align:center;color:var(--color-text-muted)}
+.vacio p{margin:0;font-size:14px;line-height:21px}
+
+/* ---------- pastillas con punto: nunca solo color ---------- */
+.pil, .etq{display:inline-flex;align-items:center;gap:8px;flex:none;padding:4px 12px;border-radius:999px;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;white-space:nowrap;
+  background:var(--color-neutral-surface-3);color:var(--color-text-muted);--punto:var(--color-text-muted)}
+.pil::before, .etq::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--punto)}
+.pil.rojo, .etq.alerta{background:var(--color-danger-bg);color:var(--color-danger-text);--punto:var(--color-danger-500)}
+.pil.amarillo, .etq.espera{background:var(--color-warning-bg);color:var(--color-warning-500);--punto:var(--color-warning-500)}
+.pil.verde{background:var(--color-success-bg);color:var(--color-success-text);--punto:var(--color-success-500)}
+.pil.azul{background:var(--color-info-bg);color:var(--color-info-500);--punto:var(--color-info-500)}
+
+/* ---------- tarjetas de arriba: una por moneda ---------- */
+.totales{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 16px}
+@media(min-width:640px){.totales{grid-template-columns:1fr 1fr}}
+.tot, .mes-mon{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px;border-radius:16px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border)}
+.tot .mon, .mes-mon h2{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;line-height:16px;
+  letter-spacing:1.68px;text-transform:uppercase;color:var(--color-text-muted)}
+.tot dl, .cifras-mes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px}
+.tot dl>div, .cifras-mes>div{min-width:0}
+.tot dl>div:first-child, .cifras-mes>div:first-child{grid-column:1 / -1}
+dt{font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+dd{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:20px;line-height:28px;
+  font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:var(--color-text-default)}
+dd b{font:inherit;color:inherit}
+.tot dl>div:first-child dd, .cifras-mes>div:first-child dd{font-weight:900;font-size:28px;line-height:34px}
+
+/* ---------- cada salida (390: tarjeta apilada) ---------- */
+.item{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"nom" "cuando" "barra" "cifras" "ver" "tabla";
+  margin:0 0 12px;padding:16px;border-radius:16px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border)}
+.item>*+*{margin-top:10px}   /* separación por margen: la fila de la tabla, oculta, no deja hueco */
+.item h3{grid-area:nom;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:20px;line-height:24px;letter-spacing:0;
+  overflow-wrap:anywhere;color:var(--color-text-default)}
+.item .cuando{grid-area:cuando;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.barra-recaudo{grid-area:barra;height:8px;border-radius:999px;overflow:hidden;background:var(--color-neutral-surface-3)}
+.barra-recaudo span{display:block;height:100%;width:var(--avance);border-radius:999px;background:var(--color-text-muted)}
+.cifras{grid-area:cifras;display:flex;flex-wrap:wrap;gap:8px 16px;margin:0}
+.cifras dt{font-size:12px;line-height:16px}
+.cifras dd{font-size:18px;line-height:24px}
+.enl.ver{grid-area:ver;justify-self:start;display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0;
+  border:0;background:none;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px;
+  text-decoration:none;color:var(--color-brand-500)}
+.chev{flex:none;transition:transform .15s}
+[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.tabla-salida{grid-area:tabla;min-width:0}
+
+/* ---------- tabla de viajeros: tarjetas por debajo de 1024 ---------- */
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+caption{caption-side:top;margin-bottom:8px;text-align:left;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.tabla-salida thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tabla-salida table, .tabla-salida tbody, .tabla-salida caption{display:block}
+.tabla-salida tbody{display:flex;flex-direction:column;gap:8px}
+.tabla-salida tr{display:grid;grid-template-columns:minmax(0,170fr) minmax(0,120fr);
+  grid-template-areas:"v e" "p f" "r r";gap:8px 12px;padding:12px;border-radius:12px;
+  background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.tabla-salida tr.acomp{margin:0 0 0 16px}
+.tabla-salida tr.cancelada{opacity:.5}
+.tabla-salida td{min-width:0;font-size:14px;line-height:21px;overflow-wrap:anywhere;color:var(--color-text-default)}
+.tabla-salida td::before{content:attr(data-label);display:block;font-weight:500;font-size:12px;line-height:16px;color:var(--color-text-muted)}
+.tabla-salida td.viajero{grid-area:v;align-self:center;padding:0;border:0;border-radius:0;background:none;
+  font-weight:500;font-size:16px;line-height:24px}   /* gana a .viajero de base.css (pastilla de otra pantalla) */
+.tabla-salida td.viajero::before, .tabla-salida td.estado::before{content:none}
+.tabla-salida tr.acomp td.viajero{font-weight:400}
+.tabla-salida td.estado{grid-area:e;justify-self:end;align-self:center}
+.tabla-salida td:nth-child(2){grid-area:p}
+.tabla-salida td:nth-child(3){grid-area:f}
+.tabla-salida td:nth-child(4){grid-area:r;display:flex;flex-wrap:wrap;align-items:center;gap:0 8px}
+.tabla-salida td:nth-child(4)::before{display:inline}
+.tabla-salida td.num{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;
+  font-variant-numeric:tabular-nums}
+.tabla-salida td.num::before{font-family:'Poppins',sans-serif}
+.tabla-salida td.num .etq{margin-top:2px}
+
+/* ---------- mes ---------- */
+#cajaSelectorMes{display:flex;flex-direction:column;gap:6px;max-width:none;margin:0 0 16px}
+#cajaSelectorMes label{margin:0;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;letter-spacing:0;
+  text-transform:none;color:var(--color-text-muted)}
+#cajaSelectorMes select{width:100%;height:44px;min-height:44px;padding:0 44px 0 14px;border-radius:12px;appearance:none;-webkit-appearance:none;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--color-text-default);
+  background:var(--color-neutral-surface-2) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%23AEAEAE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>") right 14px center/20px no-repeat;
+  border:1px solid var(--color-neutral-border)}
+#cajaSelectorMes select:focus{border-color:var(--color-brand-300)}
+.mes-mon{margin:0 0 16px}
+.sub-titulo{margin:0;padding-top:12px;border-top:1px solid var(--color-neutral-border);font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:16px;line-height:24px;letter-spacing:0;text-transform:none;color:var(--color-text-default)}
+.mes-mon .scroll{margin:0}
+table.cuentas{min-width:0;border-collapse:separate;border-spacing:0 8px}
+table.cuentas th{padding:0;font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0;
+  text-transform:none;text-align:left;color:var(--color-text-muted)}
+table.cuentas td{padding:0;vertical-align:middle;font-size:14px;line-height:21px;color:var(--color-text-default)}
+table.cuentas .num{text-align:right;white-space:nowrap}
+table.cuentas td.num{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;font-variant-numeric:tabular-nums}
+
+/* ================= escritorio ================= */
+
+/* Desde 1024: franja de arriba de 72, como la del viajero: marca a la izquierda; navegación, Oficina y Salir a la derecha.
+   Contenido a 1100 centrado (24 de margen mínimo). */
+@media(min-width:1024px){
+  header{position:sticky;top:0;z-index:10;height:72px;gap:8px;padding:0 max(24px, calc((100% - 1100px) / 2))}
+  .marca-caja{margin-right:auto}
+  .tabs{position:static;order:2;width:auto;height:72px;flex-direction:row;gap:8px;padding:0;border:0;background:none}
+  .cab-acciones{order:3;margin-left:8px}
+  .salir{gap:8px;padding:0 12px}
+  .salir .ic{display:block}
+  .tabs button{flex:none;flex-direction:row;gap:8px;height:72px;padding:0 12px;font-size:14px;line-height:21px}
+  .tabs button.on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:23px;
+    text-decoration-color:var(--color-brand-500);text-decoration-skip-ink:none}
+  .tabs button.on svg{text-decoration:none}
+  .tabs svg{width:20px;height:20px}
+  main{padding:40px max(24px, calc((100% - 1100px) / 2))}
+  h1{font-size:32px;line-height:36px}
+  .totales{gap:24px}
+
+  /* fila de salida apilada, pegada a los bordes de la tarjeta (la tabla va de borde a borde) */
+  .item{padding:20px 0 0;overflow:hidden}
+  .item>*{margin-inline:20px}
+  .item>.tabla-salida{margin:0}
+  .item>*+*{margin-top:12px}
+  .item>.enl.ver{margin-bottom:8px}
+
+  /* tabla de verdad */
+  .tabla-salida .scroll{margin:0}
+  .tabla-salida table{display:table;table-layout:fixed;min-width:1052px}
+  .tabla-salida caption{display:table-caption;caption-side:bottom;margin:0;padding:12px 24px}
+  .tabla-salida thead{position:static;display:table-header-group;width:auto;height:auto;overflow:visible;clip:auto;
+    background:var(--color-neutral-surface-3)}
+  .tabla-salida tbody{display:table-row-group}
+  .tabla-salida tr{display:table-row;padding:0;border:0;border-radius:0;background:none}
+  .tabla-salida tr.acomp{margin:0}
+  .tabla-salida th{height:44px;padding:0;text-align:left;vertical-align:middle;font-family:'Poppins',sans-serif;font-weight:500;
+    font-size:14px;line-height:21px;letter-spacing:0;text-transform:none;color:var(--color-text-muted)}
+  .tabla-salida th:nth-child(1){width:332px}
+  .tabla-salida th:nth-child(2){width:240px}
+  .tabla-salida th:nth-child(3){width:160px}
+  .tabla-salida th:nth-child(4){width:200px}
+  .tabla-salida th:first-child, .tabla-salida td.viajero{padding-left:24px}
+  .tabla-salida th:last-child, .tabla-salida td.estado{padding-right:24px}
+  .tabla-salida td{display:table-cell;padding:14px 0;border-top:1px solid var(--color-neutral-border);vertical-align:middle;
+    text-align:left}
+  .tabla-salida td::before{content:none}
+  .tabla-salida tr.acomp td.viajero{padding-left:52px}
+  .tabla-salida td:nth-child(4)::before{content:none}
+  .tabla-salida td:nth-child(4) .etq{margin-left:8px}
+  .tabla-salida td.estado{justify-self:auto}
+}
+
+/* Desde 1280: la fila de salida en una línea */
+@media(min-width:1280px){
+  .item{grid-template-columns:minmax(0,1fr) auto auto;column-gap:16px;
+    grid-template-areas:"nom cifras ver" "cuando cifras ver" "barra barra barra" "tabla tabla tabla"}
+  .item h3{justify-content:flex-start;gap:16px}
+  .item>.cuando{margin-top:4px}
+  .item>.cifras, .item>.enl.ver{margin-top:0;align-self:center}
+  .cifras{flex-wrap:nowrap;gap:32px}
+  .cifras>div:nth-child(1){width:100px}
+  .cifras>div:nth-child(2), .cifras>div:nth-child(3){width:160px}
+  .enl.ver{width:140px;justify-content:flex-end;margin-bottom:0}
+  .item>.enl.ver{margin-bottom:0}
+  .item>.barra-recaudo{margin-bottom:20px}
+  #cajaMes{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+}
+@media(min-width:1024px){
+  #cajaSelectorMes{max-width:320px}
+  .cifras-mes{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cifras-mes>div:first-child{grid-column:auto}
+}
