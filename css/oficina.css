@@ -1,0 +1,385 @@
+/* Oficina world level. Hoja propia sobre base.css (como panel.css): tokens copiados de viajero.css.
+   Medidas leídas del .fig (marcos «Nuevo · Oficina · … · Celular») y de diseno/world-level.md (d) 2, 3 y 7.
+   Montserrat 600/900, Poppins 400/500/600. Escala 12 · 14 · 16 · 18 · 20 · 28 · 32.
+   Base: 390 (celular). Desde 640 formularios en dos columnas; desde 1024 la franja de arriba (bloque al final). */
+:root {
+  --color-brand-500: #FF9700;
+  --color-brand-600: #FC6404;
+  --color-brand-300: #FEBF4D;
+  --color-neutral-bg: #1E1E1E;
+  --color-neutral-surface-1: #272727;
+  --color-neutral-surface-2: #323232;
+  --color-neutral-surface-3: #3D3D3D;
+  --color-neutral-border: #464646;
+  --color-text-default: #F2F2F0;
+  --color-text-muted: #AEAEAE;
+  --color-text-faint: #8A8A8A;
+  --color-text-on-brand: #000000;
+  --color-success-500: #3FA66B;
+  --color-success-bg: #16301F;
+  --color-warning-500: #E8B931;
+  --color-warning-bg: #3A3112;
+  --color-danger-500: #E5534B;
+  --color-danger-bg: #3B1A18;
+  --color-info-500: #5AA9E6;
+  --color-info-bg: #14283A;
+  --color-whatsapp: #25D366;
+  --color-voucher-paper: #FFFFFF;
+  --color-voucher-ink: #1D1D1D;
+  --color-voucher-ink-muted: #5C5C5C;
+  --color-voucher-rule: #E3E3E0;
+  --color-danger-text: #F2837C;
+  --color-success-text: #4AB277;
+}
+
+[hidden]{display:none !important}
+
+/* ---------- base ---------- */
+html, body{background:var(--color-neutral-bg);color:var(--color-text-default)}
+.app{max-width:none;background:var(--color-neutral-bg)}
+.curvas{display:none}
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible,
+summary:focus-visible{outline:2px solid var(--color-brand-300);outline-offset:2px}
+
+/* ---------- cabecera (390: 56 de alto) ---------- */
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0 16px;z-index:20;
+  background:var(--color-neutral-surface-2)}
+.marca-caja{display:flex;flex-direction:row;align-items:center;gap:8px}
+.marca{font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;line-height:16px;letter-spacing:1.4px;color:var(--color-text-default)}
+.marca-caja small{font-family:'Poppins',sans-serif;font-weight:400;font-size:12px;line-height:18px;letter-spacing:0;
+  text-transform:none;padding:0;color:var(--color-text-muted)}
+.cab-acciones{display:flex;align-items:center}
+.salir{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:44px;min-width:44px;padding:0 12px;
+  border:0;border-radius:0;background:none;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;
+  color:var(--color-text-muted);text-decoration:none;cursor:pointer}
+.salir:hover{color:var(--color-brand-500)}
+.salir .ic{display:none;flex:none}
+.salir .largo{display:none}
+
+/* Botón para pasar entre Oficina y Panel Global: un botón con borde, solo «Panel» u «Oficina», a todo ancho de pantalla igual. */
+.cambio-app{display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin-right:8px;padding:0 16px;
+  border:1px solid var(--color-neutral-border);border-radius:999px;background:var(--color-neutral-surface-1);
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;line-height:21px;color:var(--color-text-default);
+  text-decoration:none;white-space:nowrap;cursor:pointer}
+.cambio-app:hover{border-color:var(--color-brand-500);color:var(--color-brand-500)}
+.cambio-app[hidden]{display:none}
+
+/* ---------- navegación: barra de abajo de 72 + 1, ítems de ancho desigual (Devoluciones 94, los demás 74) ---------- */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;max-width:none;margin:0;padding:0 0 env(safe-area-inset-bottom);
+  background:var(--color-neutral-surface-2);border-top:1px solid var(--color-neutral-border);backdrop-filter:none;overflow:visible}
+.tabs button{flex:74 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  height:72px;margin:0;padding:0;border:0;border-radius:0;background:none;color:var(--color-text-muted);cursor:pointer;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none}
+.tabs button[data-tab="cancelacion"]{flex-grow:94}
+.tabs button.on{color:var(--color-brand-500)}
+.tabs button:focus-visible{outline-offset:-4px}
+.tabs svg{flex:none}
+
+/* ---------- contenido ---------- */
+main{padding:20px 16px calc(97px + env(safe-area-inset-bottom))}
+h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;line-height:32px;letter-spacing:0;margin:0 0 16px;
+  color:var(--color-text-default)}
+h2{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;letter-spacing:0;margin:24px 0 12px;
+  color:var(--color-text-default)}
+h3{font-family:'Montserrat',sans-serif;font-weight:600}
+.cejilla{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;line-height:16px;letter-spacing:1.68px;
+  text-transform:uppercase;margin:0 0 4px;color:var(--color-brand-500)}
+.tarjeta .cejilla, #cajaFicha .cejilla{color:var(--color-text-muted)}   /* la naranja es la de arriba de la pantalla */
+.tenue{font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.tenue-s{font-size:12px;line-height:16px;color:var(--color-text-muted)}
+.sub{margin:0 0 16px;max-width:none}
+.pista{margin:8px 0 0;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.volver{display:inline-flex;align-items:center;min-height:44px;margin:0 0 4px;padding:0;border:0;background:none;cursor:pointer;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.volver:hover{color:var(--color-brand-500)}
+.enl{padding:0;border:0;background:none;cursor:pointer;text-align:left;font:inherit;color:var(--color-text-default);
+  text-decoration:underline}
+.enl:hover{color:var(--color-brand-500)}
+.aviso{margin:0 0 16px;padding:12px 16px;font-size:14px;line-height:21px;border-radius:8px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);color:var(--color-brand-300)}
+.error{margin:0 0 16px;padding:12px 16px;font-size:14px;line-height:21px;border-radius:8px;
+  background:var(--color-danger-bg);border:1px solid var(--color-danger-500);color:var(--color-danger-text)}
+.errl{margin:8px 0 0;font-size:14px;line-height:21px;color:var(--color-danger-text)}
+.errl:empty{display:none}
+.vacio{padding:32px 16px;text-align:center;color:var(--color-text-muted)}
+.vacio p{margin:0;font-size:14px;line-height:21px}
+.copia-manual:not(:empty){margin-top:12px}
+.toast{background:var(--color-success-500);color:var(--color-text-on-brand);font-size:14px;line-height:21px}
+.toast.malo{background:var(--color-danger-500)}
+
+/* ---------- pastillas con punto: nunca solo color ---------- */
+.pil, .etq{display:inline-flex;align-items:center;gap:8px;flex:none;padding:4px 12px;border-radius:999px;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none;white-space:nowrap;
+  border:0;background:var(--color-neutral-surface-3);color:var(--color-text-muted);--punto:var(--color-text-muted)}
+.pil::before, .etq::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--punto)}
+.pil.rojo, .etq.alerta{background:var(--color-danger-bg);color:var(--color-danger-text);--punto:var(--color-danger-500)}
+.pil.amarillo, .etq.espera{background:var(--color-warning-bg);color:var(--color-warning-500);--punto:var(--color-warning-500)}
+.pil.verde, .etq.ok{background:var(--color-success-bg);color:var(--color-success-text);--punto:var(--color-success-500)}
+.pil.azul{background:var(--color-info-bg);color:var(--color-info-500);--punto:var(--color-info-500)}
+
+/* ---------- botones: Montserrat 900 16/20, 48 de alto, radio 12, ancho completo en celular ---------- */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:14px 16px;border:0;border-radius:12px;
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;line-height:20px;letter-spacing:0;text-align:center;
+  text-decoration:none;background:var(--color-brand-500);color:var(--color-text-on-brand);cursor:pointer}
+.btn:hover{background:var(--color-brand-600);color:var(--color-text-on-brand)}
+.btn:disabled{background:var(--color-neutral-surface-3);color:var(--color-text-muted);cursor:not-allowed}
+.btn.chico{width:100%;padding:14px 16px;font-size:16px;border-radius:12px;min-height:48px}
+.btn.fantasma{background:transparent;border:1px solid var(--color-neutral-border);color:var(--color-text-default)}
+.btn.fantasma:hover{background:var(--color-neutral-surface-2);border-color:var(--color-brand-500);color:var(--color-brand-500)}
+.btn.fantasma:disabled{background:transparent;color:var(--color-text-muted)}
+.btn.verde{background:var(--color-success-500);color:var(--color-text-on-brand)}
+.btn.verde:hover{background:var(--color-success-text);color:var(--color-text-on-brand)}
+.btn.peligro{background:var(--color-danger-500);color:var(--color-text-on-brand)}
+.btn.peligro:hover{background:var(--color-danger-text);color:var(--color-text-on-brand)}
+.btn+.btn{margin-top:0}
+.acciones{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.grupo-alerta .btn.fantasma, .item>.enl{color:var(--color-brand-500)}
+
+/* ---------- tarjetas de lista (alertas, salidas, bandeja, ficha) ---------- */
+.item{margin:0 0 12px;padding:16px;border-radius:16px;background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.item.rojo{border-color:var(--color-danger-500)}
+.item.verde{border-color:var(--color-success-500)}
+.item.amarillo{border-color:var(--color-warning-500)}
+.item.clic{cursor:pointer}
+.item.cancelada{opacity:.6}
+.item h3{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px;margin:0 0 4px;min-width:0;
+  font-size:20px;line-height:24px;letter-spacing:0;overflow-wrap:anywhere;color:var(--color-text-default)}
+.item .cuando{margin:0 0 12px;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.item .linea{margin:4px 0 0;font-size:14px;line-height:21px;overflow-wrap:anywhere;color:var(--color-text-default)}
+.item .linea b{font-weight:600}
+.item>.enl{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:12px;border:1px solid var(--color-neutral-border);
+  border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;line-height:20px;text-decoration:none;text-align:center}
+.item>.enl:hover{border-color:var(--color-brand-500)}
+
+/* cupos: barra de 8 neutra */
+.cupos{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.barra{position:relative;flex:1;height:8px;margin:0;border-radius:999px;overflow:hidden;background:var(--color-neutral-surface-3)}
+.barra span{position:absolute;left:0;top:0;height:100%;border-radius:999px;background:var(--color-text-muted)}
+.cupos b{font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;line-height:21px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cupos .tenue-s{white-space:nowrap}
+.nota-cupo{margin:12px 0 0;padding:8px 12px;font-size:14px;line-height:21px;border-radius:8px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border)}
+.nota-cupo.roja{background:var(--color-danger-bg);border-color:var(--color-danger-500);color:var(--color-danger-text)}
+
+/* cifras: lista de definiciones en dos columnas */
+dl{margin:0}
+dt{font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+dd{margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:20px;line-height:26px;
+  font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:var(--color-text-default)}
+dd.grande{font-weight:900;font-size:28px;line-height:32px}
+.cifras{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px;margin:0 0 16px}
+.cifras>div{min-width:0}
+.cifras dt{font-size:14px;line-height:21px}
+.calculo{margin:16px 0 0;padding:16px;border-radius:12px;background:var(--color-neutral-surface-2)}
+
+/* alertas */
+.grupo-alerta ul{list-style:none;margin:0;padding:0}
+.grupo-alerta li{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 0;font-size:18px;line-height:24px}
+.grupo-alerta li>span:last-child{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;font-size:16px;line-height:24px}
+.grupo-alerta li>span:last-child:empty{display:none}
+.grupo-alerta .btn{margin-top:12px}
+
+/* ---------- tabla de la salida: tarjetas por debajo de 1024 ---------- */
+.scroll{margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+caption{caption-side:top;margin-bottom:8px;text-align:left;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.scroll thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.scroll table, .scroll tbody, .scroll caption{display:block}
+.scroll tbody{display:flex;flex-direction:column;gap:8px}
+.scroll tr{display:grid;grid-template-columns:minmax(0,170fr) minmax(0,120fr);
+  grid-template-areas:"v e" "p f" "r r";gap:8px 12px;padding:12px;border-radius:12px;
+  background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.scroll tr.acomp{margin:0 0 0 16px}
+.scroll tr.cancelada{opacity:.5}
+.scroll td{min-width:0;padding:0;border:0;font-size:14px;line-height:21px;overflow-wrap:anywhere;color:var(--color-text-default)}
+.scroll td::before{content:attr(data-label);display:block;font-weight:500;font-size:12px;line-height:16px;color:var(--color-text-muted)}
+.scroll td.viajero{grid-area:v;align-self:center;padding:0;border:0;border-radius:0;background:none;
+  font-weight:500;font-size:16px;line-height:24px;color:var(--color-text-default)}   /* gana a .viajero de base.css (pastilla de otra pantalla) */
+.scroll td.viajero::before, .scroll td.estado::before{content:none}
+.scroll tr.acomp td.viajero{font-weight:400}
+.scroll td.viajero .enl{text-decoration:none}
+.scroll td.estado{grid-area:e;justify-self:end;align-self:center;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+.scroll td:nth-child(2){grid-area:p}
+.scroll td:nth-child(3){grid-area:f}
+.scroll td:nth-child(4){grid-area:r;display:flex;flex-wrap:wrap;align-items:center;gap:0 8px}
+.scroll td:nth-child(4)::before{display:inline}
+.scroll td.num{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:24px;font-variant-numeric:tabular-nums}
+.scroll td.num::before{font-family:'Poppins',sans-serif}
+.scroll td.num .etq{margin-top:2px}
+
+/* ---------- bandeja: datos y comprobante ---------- */
+.abono-datos{min-width:0}
+.comprobante{margin:12px 0 0}
+.comprobante img{display:block;max-width:100%;max-height:420px;border-radius:12px;border:1px solid var(--color-neutral-border);
+  background:var(--color-neutral-bg)}
+.comprobante a{color:var(--color-brand-500)}
+.comprobante-ver{display:block;max-width:100%;padding:0;border:0;background:none;cursor:pointer}
+.control{margin:12px 0 0}
+.control .fila{display:flex;flex-wrap:wrap;gap:8px}
+.control .fila input{flex:1 1 180px;min-width:0}
+
+/* ---------- formularios ---------- */
+label{display:block;margin:16px 0 8px;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;line-height:21px;letter-spacing:0;
+  text-transform:none;color:var(--color-text-default)}
+.opc{font-weight:400;font-size:12px;line-height:16px;letter-spacing:0;text-transform:none;color:var(--color-text-muted)}
+.req{margin-left:4px;font-weight:600;color:var(--color-danger-text)}
+input, select, textarea{width:100%;min-height:48px;padding:0 16px;border-radius:12px;font-family:'Poppins',sans-serif;font-weight:400;
+  font-size:16px;line-height:24px;background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);
+  color:var(--color-text-default)}
+textarea{padding:12px 16px;min-height:96px}
+input:focus, select:focus, textarea:focus{outline:none;border-color:var(--color-brand-300)}
+input:focus-visible, select:focus-visible, textarea:focus-visible{outline:2px solid var(--color-brand-300);outline-offset:2px}
+input::placeholder{color:var(--color-text-faint)}
+select{padding-right:44px;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='%23AEAEAE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:20px}
+input[type=file]{min-height:0;padding:0;border:0;background:none;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+input[type=file]::file-selector-button{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin:0 0 8px;
+  padding:14px 16px;border:1px solid var(--color-neutral-border);border-radius:12px;background:transparent;cursor:pointer;
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;line-height:20px;color:var(--color-text-default)}
+input[type=search]{-webkit-appearance:none;appearance:none}
+.check{display:flex;align-items:flex-start;gap:12px;margin:16px 0 0;padding:12px 16px;border-radius:12px;cursor:pointer;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border)}
+.check.on{border-color:var(--color-brand-500)}
+.check input{width:24px;height:24px;min-height:0;flex:none;margin:0;padding:0;accent-color:var(--color-brand-500)}
+.check span{font-size:16px;line-height:24px}
+.check em{display:block;font-style:normal;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+.tarjeta{margin:0 0 16px;padding:16px;border-radius:16px;background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.tarjeta>label:first-child{margin-top:0}
+.dos-col{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.sub-titulo{margin:20px 0 0;padding-top:12px;border-top:1px solid var(--color-neutral-border);font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:16px;line-height:24px;letter-spacing:0;text-transform:none;color:var(--color-text-default)}
+
+/* ---------- ficha del viajero ---------- */
+#cajaFicha:not(:empty){margin-top:16px;padding-top:16px;border-top:1px solid var(--color-neutral-border)}
+.resultados{display:flex;flex-direction:column;gap:8px;margin:12px 0 16px}
+.resultado{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;min-height:44px;padding:12px 16px;
+  text-align:left;border-radius:12px;cursor:pointer;font:inherit;font-size:14px;line-height:21px;
+  background:var(--color-neutral-surface-2);border:1px solid var(--color-neutral-border);color:var(--color-text-default)}
+.resultado:hover{border-color:var(--color-brand-500)}
+.resultado b{font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;line-height:24px}
+.resultado[disabled]{opacity:.5;cursor:default}
+.resultado .pil{margin-top:4px}
+.conteo{margin:16px 0 0}
+.filtros-viajeros{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+#cajaLista[hidden], #vistaFicha[hidden]{display:none}
+.datos{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:16px 0;padding:16px;border-radius:16px;
+  background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+.datos dd{font-family:'Poppins',sans-serif;font-weight:400;font-size:16px;line-height:24px}
+.reqs{list-style:none;margin:0;padding:0}
+.reqs li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:8px 0}
+.reqs label{display:flex;align-items:center;gap:12px;flex-basis:100%;min-height:44px;margin:0;cursor:pointer;
+  font-weight:400;font-size:16px;line-height:24px}
+.reqs input[type=checkbox]{width:24px;height:24px;min-height:0;flex:none;padding:0;accent-color:var(--color-brand-500)}
+.descuento{margin:0 0 4px}
+.bitacora{list-style:none;margin:0;padding:0}
+.bitacora li{padding:12px 0;font-size:16px;line-height:24px;overflow-wrap:anywhere}
+.bitacora .cambios{display:flex;flex-direction:column;gap:2px;margin-top:4px;font-size:14px;line-height:21px;color:var(--color-text-muted)}
+
+/* ---------- abono a mano ---------- */
+.fila-ab{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid var(--color-neutral-border)}
+.fila-ab .quien{min-width:0;overflow-wrap:anywhere}
+.fila-ab input{flex:none}
+.grupo-ab[hidden], #ab-trm-caja[hidden]{display:none}
+.con-moneda{display:flex;align-items:center;gap:8px}
+.con-moneda span{font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;line-height:24px}
+
+/* ---------- cancelación y devoluciones ---------- */
+.fila-cc{display:flex;flex-direction:column;gap:8px}
+#cc-confirmar{margin-top:16px}
+
+/* ---------- 640: formularios en dos columnas ---------- */
+@media(min-width:640px){
+  .dos-col{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 16px}
+  .filtros-viajeros{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 16px}
+  .filtros-viajeros .filtro-busca{grid-column:1 / -1}
+}
+
+/* ================= escritorio ================= */
+
+/* Desde 1024: franja de arriba de 72, como la del Panel Global: marca a la izquierda; navegación y acciones a la derecha.
+   De 1024 a 1279 los rótulos de las acciones quedan solo para lectores (botones de 44 × 44 con icono). Contenido a 1100 centrado. */
+@media(min-width:1024px){
+  header{position:sticky;top:0;z-index:10;height:72px;gap:8px;padding:0 max(24px, calc((100% - 1100px) / 2))}
+  .marca-caja{margin-right:auto}
+  .tabs{position:static;order:2;width:auto;height:72px;flex-direction:row;gap:8px;padding:0;border:0;background:none}
+  .cab-acciones{order:3;margin-left:8px}
+  .salir{gap:8px;padding:0 12px}
+  .salir .ic{display:block}
+  .salir .rotulo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .tabs button{flex:none;flex-direction:row;gap:8px;height:72px;padding:0 12px;font-size:14px;line-height:21px}
+  .tabs button[data-tab="cancelacion"]{flex-grow:0}
+  .tabs button.on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:23px;
+    text-decoration-color:var(--color-brand-500);text-decoration-skip-ink:none}
+  .tabs button.on svg{text-decoration:none}
+  .tabs svg{width:20px;height:20px}
+  main{padding:40px max(24px, calc((100% - 1100px) / 2))}
+  h1{font-size:32px;line-height:36px}
+
+  /* botones en fila, a su ancho */
+  .btn, .btn.chico{width:auto;padding:14px 24px}
+  .acciones{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .grupo-alerta .btn, .item>.enl{width:auto;display:inline-flex;padding:14px 24px}
+  .tarjeta{max-width:760px}
+
+  /* salidas: nombre y semáforo; fechas a la izquierda y cupos a la derecha; cifras en 3 × 2 */
+  .item.clic{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:24px;align-items:center}
+  .item.clic>h3, .item.clic>.cifras, .item.clic>.enl{grid-column:1 / -1}
+  .item.clic>.cuando{margin:0 0 16px}
+  .item.clic>.cupos{margin:0 0 16px}
+  .item.clic>.enl{justify-self:start}
+  .cifras{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 24px}
+  .item.clic .cifras{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .calculo{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+  /* bandeja: comprobante a la izquierda, datos a la derecha */
+  .abono-cuerpo{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:start}
+  .abono-cuerpo>.comprobante{order:-1;margin:0}
+  .abono-datos .acciones{margin-bottom:0}
+
+  /* tabla de verdad: 5 columnas */
+  .scroll{border-radius:16px;background:var(--color-neutral-surface-1);border:1px solid var(--color-neutral-border)}
+  .scroll table{display:table;table-layout:fixed}
+  .scroll caption{display:table-caption;caption-side:bottom;margin:0;padding:12px 24px}
+  .scroll thead{position:static;display:table-header-group;width:auto;height:auto;overflow:visible;clip:auto;
+    background:var(--color-neutral-surface-3)}
+  .scroll tbody{display:table-row-group}
+  .scroll tr{display:table-row;padding:0;border:0;border-radius:0;background:none}
+  .scroll tr.acomp{margin:0}
+  .scroll th{height:44px;padding:0;text-align:left;vertical-align:middle;font-family:'Poppins',sans-serif;font-weight:500;
+    font-size:14px;line-height:21px;letter-spacing:0;text-transform:none;color:var(--color-text-muted)}
+  .scroll th:nth-child(1){width:30%}
+  .scroll th:nth-child(2){width:22%}
+  .scroll th:nth-child(3){width:16%}
+  .scroll th:nth-child(4){width:20%}
+  .scroll th:first-child, .scroll td.viajero{padding-left:24px}
+  .scroll th:last-child, .scroll td.estado{padding-right:24px}
+  .scroll td{display:table-cell;padding:14px 0;border-top:1px solid var(--color-neutral-border);vertical-align:middle;text-align:left}
+  .scroll td::before{content:none}
+  .scroll tr.acomp td.viajero{padding-left:52px}
+  .scroll td:nth-child(4)::before{content:none}
+  .scroll td:nth-child(4) .etq{margin-left:8px}
+  .scroll td:nth-child(4), .scroll td.estado{display:table-cell}
+  .scroll td.viajero{padding:14px 0 14px 24px;border-top:1px solid var(--color-neutral-border)}
+  .scroll tr.acomp td.viajero{padding-left:52px}
+
+  /* ficha y búsqueda */
+  .datos{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .resultado{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 16px}
+  .resultado .tenue-s{margin-left:auto}
+
+  /* abono a mano y cancelación */
+  .fila-ab{flex-direction:row;align-items:center;justify-content:space-between}
+  .fila-ab .quien{flex:1 1 auto}
+  .fila-ab input{flex:0 0 220px;width:220px}
+  .fila-cc{flex-direction:row;align-items:center}
+  .fila-cc input{flex:1 1 200px;width:auto}
+  .filtros-viajeros{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+  .filtros-viajeros .filtro-busca{grid-column:auto}
+}
+
+/* Desde 1280: los rótulos de las acciones vuelven; las seis cifras de cada salida, en una fila */
+@media(min-width:1280px){
+  .salir .rotulo{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
+  .item.clic .cifras{grid-template-columns:repeat(6,minmax(0,1fr))}
+}

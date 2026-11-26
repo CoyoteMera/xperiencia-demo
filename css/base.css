@@ -1,0 +1,297 @@
+:root{
+  --naranja:#FF9700; --naranja-hot:#FC6404; --naranja-luz:#FEBF4D;
+  --negro:#000000; --carbon:#272727; --grafito:#323232; --humo:#393939;
+  --niebla:#8A8A8A; --hielo:#F2F2F0; --blanco:#FFFFFF;
+  --ok:#2E7D4F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+#sinJS{position:fixed;top:0;left:0;right:0;z-index:9998;background:#7A1F1F;color:#fff;
+  font:13px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  padding:14px 18px;text-align:left}
+#sinJS b{display:block;font-size:14px;margin-bottom:4px}
+body.js-ok #sinJS{display:none}
+body.js-ok{padding-top:0}
+body:not(.js-ok){padding-top:96px}
+html{-webkit-text-size-adjust:100%;background:#272727;color:#F2F2F0;
+  min-height:100%;color-scheme:dark}
+body{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:#272727; color:#F2F2F0;
+  min-height:100vh; min-height:100dvh; line-height:1.55; overflow-x:hidden;
+}
+.app{max-width:560px;margin:0 auto;min-height:100vh;min-height:100dvh;
+  position:relative;background:#272727}
+
+/* ---------- textura de altímetro: líneas de nivel al fondo ---------- */
+.curvas{position:fixed;inset:0;z-index:0;opacity:.055;pointer-events:none;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 38px,var(--hielo) 38px 39px)}
+
+/* ---------- cabecera ---------- */
+header{position:relative;z-index:2;padding:22px 22px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca-caja{display:flex;flex-direction:column;gap:3px}
+.logo{height:22px;width:auto;display:block}
+.marca-caja small{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:600;font-size:8.5px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--niebla);padding-left:2px}
+.logo-grande{width:230px;max-width:72%;height:auto;display:block;margin:4px 0 24px}
+.salir{background:none;border:1px solid var(--humo);color:var(--niebla);
+  font-family:'Poppins';font-size:11px;padding:7px 13px;border-radius:99px;cursor:pointer}
+.salir:hover{border-color:var(--naranja);color:var(--naranja)}
+
+main{position:relative;z-index:2;padding:0 22px 120px}
+
+/* ---------- tipografía ---------- */
+h1{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:29px;line-height:1.1;
+  letter-spacing:-.02em;color:#F2F2F0}
+h2{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;
+  margin-bottom:14px;color:#F2F2F0}
+.cejilla{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--naranja);margin-bottom:9px}
+.tenue{color:var(--niebla);font-size:13.5px}
+
+/* ---------- tarjetas ---------- */
+.tarjeta{background:var(--grafito);border-radius:16px;padding:20px;margin-bottom:14px;
+  border:1px solid #3d3d3d}
+
+/* ---------- botones ---------- */
+.btn{display:block;width:100%;background:var(--naranja);color:var(--negro);border:none;
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:14px;letter-spacing:.02em;
+  padding:16px;border-radius:12px;cursor:pointer;text-align:center}
+.btn:hover{background:var(--naranja-hot);color:#fff}
+.btn:disabled{background:var(--humo);color:var(--niebla);cursor:not-allowed}
+.btn.fantasma{background:transparent;border:1.5px solid #5A5A5A;color:#F2F2F0}
+.btn.fantasma:hover{border-color:var(--naranja);color:var(--naranja);background:none}
+.btn+.btn{margin-top:10px}
+.enlace{display:block;width:100%;background:none;border:none;color:var(--niebla);
+  font-family:'Poppins';font-size:13px;padding:15px 0 2px;cursor:pointer;text-decoration:underline}
+.enlace:hover{color:var(--naranja)}
+
+/* ---------- campos ---------- */
+label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--niebla);margin:16px 0 7px}
+input,select{width:100%;background:var(--carbon);border:1.5px solid var(--humo);
+  color:var(--hielo);font-family:'Poppins';font-size:16px;padding:14px;border-radius:11px}
+input:focus,select:focus{outline:none;border-color:var(--naranja)}
+.dos{display:grid;grid-template-columns:1.4fr 1fr;gap:9px}
+.pasos{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.paso{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:9.5px;letter-spacing:.08em;
+  text-transform:uppercase;padding:5px 10px;border-radius:99px;
+  border:1px solid #4A4A4A;color:#7A7A7A}
+.paso.ok{border-color:#25D366;color:#25D366}
+.paso.act{background:#FF9700;border-color:#FF9700;color:#000}
+.pista{font-size:11.5px;color:#9A9A98;margin-top:8px;line-height:1.5}
+select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23FF9700' stroke-width='2' fill='none'/></svg>");
+  background-repeat:no-repeat;background-position:right 15px center}
+
+/* ================= FIRMA: LA ESCALERA ================= */
+.escalera{position:relative;padding:6px 0 6px 52px;margin:6px 0}
+/* la cuerda que une los peldaños */
+.escalera::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;
+  background:linear-gradient(to top,var(--humo) 0%,var(--humo) var(--avance,0%),transparent var(--avance,0%));}
+.escalera::after{content:'';position:absolute;left:19px;bottom:20px;width:2px;height:var(--avance,0%);
+  background:linear-gradient(to top,var(--naranja-luz),var(--naranja));border-radius:2px}
+.peldano{position:relative;padding:9px 0;display:flex;align-items:center;gap:12px}
+.cota{position:absolute;left:-52px;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--carbon);border:2px solid var(--humo);
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:13px;color:var(--niebla);z-index:2}
+.peldano.hecho .cota{background:var(--naranja);border-color:var(--naranja);color:var(--negro)}
+.peldano.sigue .cota{border-color:var(--naranja);color:var(--naranja);
+  box-shadow:0 0 0 5px rgba(255,151,0,.14)}
+.nombre-peldano{font-size:14.5px;font-weight:500;color:var(--niebla)}
+.peldano.hecho .nombre-peldano{color:var(--hielo);font-weight:600}
+.peldano.sigue .nombre-peldano{color:var(--naranja);font-weight:600}
+.veces{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:10px;color:var(--negro);
+  background:var(--naranja-luz);padding:2px 7px;border-radius:99px}
+.etiq-sigue{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--naranja);border:1px solid var(--naranja);
+  padding:2px 7px;border-radius:99px}
+.fase0{padding:9px 0 15px;position:relative}
+.fase0 .cota{border-style:dashed;font-size:10px}
+
+/* ---------- resumen superior ---------- */
+.saludo{padding:8px 0 22px}
+.perfil-chip{display:inline-block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;padding:5px 12px;border-radius:99px;
+  background:var(--naranja);color:var(--negro);margin-bottom:14px}
+.perfil-chip.explorador{background:var(--ok);color:#fff}
+.perfil-chip.todoterreno{background:var(--naranja-luz);color:var(--negro)}
+.perfil-chip.curioso{background:var(--humo);color:var(--hielo)}
+.contador{display:flex;gap:26px;margin-top:16px;padding-top:16px;border-top:1px solid var(--humo)}
+.dato .cifra{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:900;font-size:30px;color:var(--naranja);line-height:1}
+.dato .rotulo{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--niebla);margin-top:5px}
+
+/* ---------- explicacion de perfiles ---------- */
+.reco{font-size:13px;color:#C8C8C6;line-height:1.6;margin-top:16px;padding-top:15px;
+  border-top:1px solid #454545}
+.demo-caja{border-style:dashed;border-color:#5A5A5A}
+.demo-lista{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.demo-btn{background:#272727;border:1px solid #4A4A4A;border-radius:10px;padding:11px 10px;
+  cursor:pointer;text-align:left;font-family:'Poppins'}
+.demo-btn:hover{border-color:#FF9700}
+.demo-btn b{display:block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:13px;color:#F2F2F0}
+.demo-btn span{display:block;font-size:10.5px;color:#9A9A98;margin-top:2px}
+.explica{font-size:13.5px;color:#C8C8C6;line-height:1.6}
+.perfil-fila{padding:12px 0;border-top:1px solid #454545}
+.perfil-fila b{display:block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:13px;color:#FF9700;margin-bottom:2px}
+.perfil-fila span{font-size:12.5px;color:#A8A8A6;line-height:1.5}
+
+/* ---------- recompensas ---------- */
+.premio{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--humo)}
+.premio:last-child{border-bottom:none}
+.medalla{width:40px;height:40px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;
+  background:#1E1E1E;border:1.5px dashed #6A6A6A;
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:14px;color:#B4B4B4}
+.premio.ganado .medalla{background:var(--naranja);border:1.5px solid var(--naranja);color:var(--negro)}
+.premio-txt{flex:1;min-width:0}
+.premio-txt b{display:block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:14px;color:#D6D6D4}
+.premio.ganado .premio-txt b{color:#FFFFFF}
+.premio-txt span{font-size:12px;color:#A0A0A0;display:block;margin-top:1px}
+.premio.ganado .premio-txt span{color:var(--naranja-luz)}
+.premio.siguiente .medalla{border-color:var(--naranja);color:var(--naranja);border-style:solid}
+.premio.siguiente .premio-txt b{color:var(--naranja)}
+
+/* ---------- listas de destinos (no nevados) ---------- */
+.pastillas{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.pastilla{font-size:12px;padding:6px 12px;border-radius:99px;background:var(--carbon);
+  border:1px solid var(--humo);color:var(--hielo)}
+.pastilla b{color:var(--naranja);font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:10px;margin-left:4px}
+
+/* ---------- grupos en formación ---------- */
+.grupo{background:var(--grafito);border:1px solid #3d3d3d;border-left:3px solid var(--naranja);
+  border-radius:12px;padding:16px;margin-bottom:11px}
+.grupo h3{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:15px;margin-bottom:3px}
+.grupo .cuando{font-size:12px;color:var(--niebla);margin-bottom:12px}
+.barra{height:8px;background:#1E1E1E;border-radius:99px;overflow:hidden;margin:11px 0 8px;position:relative}
+.barra i{position:absolute;left:0;top:0;height:100%;background:#5A4520;border-radius:99px}
+.barra span{position:absolute;left:0;top:0;height:100%;
+  background:linear-gradient(90deg,var(--naranja-luz),var(--naranja));border-radius:99px}
+.conteo{font-size:11.5px;color:#9A9A98;margin-bottom:6px}
+.conteo b{color:#FF9700;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:11.5px}
+.viajero.res{border-color:#25D366;color:#D6D6D4}
+.viajero.res b{color:#fff}
+.toggle{margin-left:8px;background:none;border:1px solid #6A6A6A;color:#B4B4B4;
+  font-family:'Poppins';font-size:9.5px;padding:2px 7px;border-radius:99px;cursor:pointer}
+.toggle:hover{border-color:#FF9700;color:#FF9700}
+.ya-reservo{margin-top:14px;text-align:center;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;
+  font-size:13px;color:#25D366;border:1.5px solid #25D366;border-radius:12px;padding:14px}
+.faltan{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:12px;color:var(--naranja)}
+.faltan.completo{color:var(--ok)}
+.viajeros{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.viajero{font-size:11px;background:var(--carbon);border:1px solid var(--humo);
+  padding:5px 10px;border-radius:99px;color:var(--niebla)}
+.viajero b{color:var(--hielo);font-weight:600}
+.grupo.mio{border-left-color:#25D366}
+.sello{display:inline-block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:9px;
+  letter-spacing:.14em;text-transform:uppercase;color:#25D366;border:1px solid #25D366;
+  padding:3px 9px;border-radius:99px;margin-bottom:9px}
+.cuando em{font-style:normal;color:#FF9700;font-weight:600}
+a.btn.reservar{margin-top:14px;text-decoration:none;line-height:1.3}
+.salir-grupo{font-size:12.5px;padding:11px 0 2px;color:#8A8A8A}
+
+/* ---------- enlaces a la web y WhatsApp ---------- */
+.enlaces{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.enlace-caja{display:block;text-decoration:none;background:#323232;border:1px solid #3d3d3d;
+  border-radius:14px;padding:15px 14px;color:#F2F2F0}
+.enlace-caja i{display:block;font-style:normal;font-size:19px;color:#FF9700;margin-bottom:7px}
+.enlace-caja b{display:block;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:13px;line-height:1.25}
+.enlace-caja span{display:block;font-size:10.5px;color:#A0A0A0;margin-top:3px}
+.enlace-caja:hover{border-color:#FF9700}
+.enlace-caja.wa i{color:#25D366}
+
+/* ---------- pago ---------- */
+.con-moneda{display:flex;align-items:center;gap:9px}
+.con-moneda span{font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;color:#FF9700}
+.con-moneda input{flex:1}
+.datos-pago{background:#1E1E1E;border:1px solid #4A4A4A;border-radius:11px;
+  padding:13px 15px;margin-top:11px;font-size:13px;line-height:1.65;color:#D6D6D4}
+.datos-pago b{color:#FF9700;font-family:'Montserrat',sans-serif;font-size:13px}
+input[type=file]{padding:11px;font-size:13px;color:#A0A0A0}
+
+/* ---------- catálogo de tours ---------- */
+.tour{background:#323232;border:1px solid #3d3d3d;border-radius:14px;padding:16px;margin-bottom:11px}
+.tour.reco{border-color:#FF9700}
+.tour h3{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;color:#F2F2F0}
+.tour-meta{font-size:12.5px;color:#FF9700;font-weight:500;margin-bottom:13px}
+.tour-btns{display:flex;gap:8px}
+.mini{flex:1;text-align:center;text-decoration:none;background:#FF9700;color:#000;border:none;
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:12px;padding:11px;border-radius:9px;cursor:pointer}
+.mini.gris{background:transparent;border:1.5px solid #5A5A5A;color:#D6D6D4}
+.reco-sello{color:#FF9700;border-color:#FF9700}
+.hecho-sello{color:#25D366;border-color:#25D366}
+.opc{text-transform:none;letter-spacing:0;color:#7A7A7A;font-weight:400}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.78);
+  display:flex;align-items:center;justify-content:center;padding:24px}
+.modal-caja{background:#323232;border:1px solid #4a4a4a;border-radius:18px;
+  padding:24px;max-width:400px;width:100%}
+.btn.peligro{background:#C0392B;color:#fff}
+.btn.peligro:hover{background:#A93226}
+
+/* ---------- navegación inferior ---------- */
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(0,0,0,.94);
+  backdrop-filter:blur(14px);border-top:1px solid var(--humo);display:flex;
+  max-width:560px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;border:none;color:var(--niebla);padding:13px 4px 15px;
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;border-top:2px solid transparent;margin-top:-1px}
+nav button.on{color:var(--naranja);border-top-color:var(--naranja)}
+nav button i{display:block;font-style:normal;font-size:17px;margin-bottom:3px}
+
+/* ---------- utilidades ---------- */
+.pantalla{display:none;animation:sube .3s ease}
+.pantalla.viva{display:block}
+@keyframes sube{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.aviso{background:rgba(255,151,0,.09);border:1px solid rgba(255,151,0,.32);
+  border-radius:11px;padding:13px 15px;font-size:12.5px;margin-bottom:14px;color:var(--naranja-luz)}
+.error{background:rgba(200,40,40,.12);border:1px solid rgba(220,70,70,.4);
+  border-radius:11px;padding:12px 15px;font-size:13px;margin-top:14px;color:#FF9E9E}
+.vacio{text-align:center;padding:40px 20px;color:var(--niebla)}
+.vacio p{font-size:14px;margin-bottom:18px}
+.check{display:flex;align-items:flex-start;gap:11px;padding:12px;background:var(--carbon);
+  border:1.5px solid var(--humo);border-radius:11px;margin-bottom:8px;cursor:pointer}
+.check.on{border-color:var(--naranja);background:rgba(255,151,0,.07)}
+.check input{width:19px;height:19px;flex-shrink:0;margin-top:1px;accent-color:var(--naranja)}
+.check span{font-size:14px}
+.check em{display:block;font-style:normal;font-size:11px;color:var(--niebla);margin-top:2px}
+.legal{font-size:11px;color:var(--niebla);line-height:1.65;margin-top:16px}
+.legal a{color:var(--naranja)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ── v10: obligatorios, contraseña, avisos ── */
+.req{color:var(--naranja);font-weight:800;margin-left:3px}
+.nota-req{font-size:11px;color:var(--niebla);margin:0 0 14px}
+.campo-clave{position:relative}
+.campo-clave input{padding-right:62px}
+.ojo{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;
+  color:var(--naranja);font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;
+  padding:8px 6px;font-family:'Montserrat',-apple-system,sans-serif}
+.reglas-clave{list-style:none;padding:0;margin:8px 0 0;font-size:11.5px;line-height:1.9;color:var(--niebla)}
+.reglas-clave li::before{content:'○ ';color:var(--niebla)}
+.reglas-clave li.ok{color:var(--ok)}
+.reglas-clave li.ok::before{content:'✓ ';color:var(--ok)}
+.toast{position:fixed;left:16px;right:16px;bottom:88px;z-index:9998;background:var(--ok);color:#fff;
+  font-size:13.5px;line-height:1.5;padding:14px 16px;border-radius:12px;text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.toast.malo{background:#7A1F1F}
+.aviso-cupo{font-size:12px;line-height:1.6;color:var(--niebla);border-left:2px solid var(--naranja);
+  padding:2px 0 2px 12px;margin:14px 0 0}
+.medalla.cifra{font-size:10.5px;letter-spacing:-.03em;border-style:solid;
+  border-color:var(--naranja);color:var(--naranja)}
+
+/* ── 7b: Mi viaje, acompañantes, comprobante ── */
+.cifras-m{display:flex;gap:8px;margin:12px 0 4px}
+.cifra-m{flex:1;background:var(--carbon);border:1px solid var(--humo);border-radius:11px;padding:9px 8px;text-align:center;min-width:0}
+.cifra-m span{display:block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--niebla)}
+.cifra-m b{display:block;font-family:'Montserrat',-apple-system,sans-serif;font-size:13px;margin-top:3px;overflow-wrap:anywhere}
+.cifra-m.saldo b{color:var(--naranja)}
+.por-validar b{color:#FF9700}
+.miviaje .btn{margin-top:14px}
+.miviaje .btn+.btn{margin-top:10px}
+.acomps-m{margin-top:14px;border-top:1px solid #3d3d3d;padding-top:12px}
+.acomp-m{display:flex;flex-direction:column;gap:2px;font-size:13px;padding:6px 0}
+.acomp-m span{font-size:11.5px;color:var(--niebla)}
+.acomp{background:var(--carbon);border:1px solid var(--humo);border-radius:13px;padding:14px;margin-top:12px}
+.acomp label{margin-top:10px}
+.politica{white-space:pre-line;font-size:12px;color:#B8B8B6}

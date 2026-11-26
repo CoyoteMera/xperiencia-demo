@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Panel Global · Xperiencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/panel.css">
+<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+<div id="barraDemo" hidden></div>
+<script>
+/* Clásico y en línea, como en index.html: corre al instante y sin depender de los módulos.
+   Si el módulo del panel falla, el error se ve en pantalla en vez de una página vacía. */
+document.body.className = 'js-ok';
+(function(){
+  function pintar(msg){
+    var d = document.getElementById('errorGlobal');
+    if(!d){
+      d = document.createElement('div');
+      d.id = 'errorGlobal';
+      d.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:9999;' +
+        'background:#7A1F1F;color:#fff;font:12px/1.5 -apple-system,sans-serif;' +
+        'padding:14px 16px 28px;max-height:40vh;overflow:auto;white-space:pre-wrap;cursor:pointer;';
+      d.title = 'Tocar para cerrar';
+      d.onclick = function(){ d.remove(); };
+      document.body.appendChild(d);
+    }
+    d.textContent += msg + '\n';
+  }
+  window.addEventListener('error', function(e){ pintar('ERROR: ' + e.message + '\nen línea ' + e.lineno); });
+  window.addEventListener('unhandledrejection', function(e){ pintar('ERROR (promesa): ' + e.reason); });
+  window.__pintarError = pintar;
+})();
+</script>
+<script nomodule>document.body.className = '';</script>
+<div id="sinJS">
+  <b>⚠ El JavaScript está bloqueado</b>
+  Este visor no ejecuta el Panel Global. Ábrelo en Safari o en Chrome.
+</div>
+<div class="curvas"></div>
+
+<!-- Hasta que exigirRol(['dueno']) confirme el rol, no se muestra nada del panel. Solo lectura. -->
+<div class="app panel" id="appPanel" hidden>
+
+<header>
+  <div class="marca-caja">
+    <span class="marca">XPERIENCIA</span>
+    <small>Panel Global</small>
+  </div>
+  <div class="cab-acciones">
+    <a class="cambio-app" id="enlaceOficina" href="oficina.html">Oficina</a>
+    <button class="salir" id="btnSalirPanel" onclick="salirPanel()"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>Salir</button>
+  </div>
+  <nav class="tabs" id="tabsPanel" role="tablist" aria-label="Secciones del Panel Global">
+  <button type="button" role="tab" data-tab="salidas" class="on" aria-selected="true" onclick="irPanel('salidas')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span>Salidas</span></button>
+  <button type="button" role="tab" data-tab="mes" aria-selected="false" onclick="irPanel('mes')"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><span>Mes</span></button>
+</nav>
+</header>
+
+
+<main>
+  <div id="avisoSinRed" class="aviso" style="display:none"></div>
+
+  <!-- ============ SALIDAS (visible al entrar) ============ -->
+  <section class="pantalla viva" id="v-salidas">
+    <div class="cejilla">Salidas próximas</div>
+    <h1>En vivo</h1>
+    <div id="cajaTotales"><div class="aviso">Un momento…</div></div>
+    <h2>Cada salida</h2>
+    <div id="cajaSalidas"></div>
+  </section>
+
+  <!-- ============ MES ============ -->
+  <section class="pantalla" id="v-mes">
+    <div class="cejilla">Vista del mes</div>
+    <h1>Mes</h1>
+    <p class="tenue sub">Lo recaudado cuenta por la fecha del abono. Pesos y dólares van por separado.</p>
+    <div id="cajaSelectorMes"></div>
+    <div id="cajaMes"><div class="aviso">Un momento…</div></div>
+  </section>
+</main>
+
+</div>
+
+<script src="vendor/supabase.js"></script>
+<script type="module" src="js/panel/main.js"
+  onerror="__pintarError('ERROR: no se pudo cargar el Panel Global (falta o falló un archivo de js/panel/).')"></script>
+</body>
+</html>
